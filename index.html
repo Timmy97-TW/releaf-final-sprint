@@ -77,7 +77,7 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 .linkbtn{background:none;border:0;padding:3px 6px;color:var(--sw);cursor:pointer;font-size:12px;font-weight:500}
 .key{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-left:8px}
 .key i{display:inline-block;width:22px;height:10px;border-radius:3px}
-.key .k-est{background:var(--muted) repeating-linear-gradient(135deg,rgba(255,255,255,.35) 0 3px,transparent 3px 7px)}
+.key .k-est{background:color-mix(in srgb,var(--sw) 64%,#fff)}
 .key .k-ph{background:linear-gradient(90deg,var(--ph-draft) 0 25%,var(--ph-refine) 25% 50%,var(--ph-video) 50% 75%,var(--ph-rehearse) 75%);height:4px;width:28px;border-radius:2px}
 
 /* ---------- calendar ---------- */
@@ -91,7 +91,7 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 .cell{border-right:1px solid var(--line-soft);cursor:pointer;position:relative}
 .cell:last-child{border-right:0}
 .cell.we{background:#fafbfc}
-.cell.post{background:#f0f1f4;background-image:repeating-linear-gradient(135deg,transparent 0 7px,rgba(21,33,63,.045) 7px 8px)}
+.cell.post{background:#eceef2}
 .cell.out{background:var(--paper);cursor:default}
 .cell.today{background:var(--lime-soft)}
 .cell.past{background:#eceef2}
@@ -114,7 +114,9 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
   background:var(--c);color:#fff;font-size:var(--fs,11.5px);font-weight:600;padding:0 7px 0 7px;white-space:nowrap;overflow:hidden;cursor:pointer;text-align:left;transition:filter .12s,opacity .12s}
 .bar .t{overflow:hidden;text-overflow:ellipsis;min-width:0}
 .bar svg{font-size:calc(var(--fs,11.5px) + 1px);color:rgba(255,255,255,.85)}
-.bar.est{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.2) 0 5px,transparent 5px 11px)}
+.bar.est{background:color-mix(in srgb,var(--c) 64%,#fff)}
+.bar .estt{margin-left:auto;flex:none;font-size:9px;font-weight:700;border:1px solid rgba(255,255,255,.75);border-radius:3px;padding:0 3px;line-height:12px}
+.bar .estt + .must,.bar .estt + .end{margin-left:4px}
 .bar.cl{margin-left:0;border-top-left-radius:0;border-bottom-left-radius:0}
 .bar.cr{margin-right:0;border-top-right-radius:0;border-bottom-right-radius:0}
 .bar .must{margin-left:auto;flex:none;font-size:8.5px;font-weight:800;letter-spacing:.06em;color:var(--red);background:#fff;border-radius:3px;padding:0 4px;line-height:13px}
@@ -153,9 +155,47 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 .d-row small{display:block;color:var(--muted)}
 .d-sec{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:12px 0 4px}
 
+/* ---------- Replan ---------- */
+.tool.rp{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tool.rp:hover{filter:brightness(1.2)}
+.tool.rp b{background:var(--lime);color:var(--navy);border-radius:999px;padding:0 6px;font-size:10.5px;margin-left:2px}
+body.editing .bar{outline:1.5px dashed rgba(255,255,255,.6);outline-offset:-4px}
+body.editing .cal{box-shadow:0 0 0 2px var(--navy)}
+.bar.edited,.flag.edited{box-shadow:0 0 0 2px #f2b705,0 0 0 4px #fff}
+.rpbar{position:fixed;left:16px;bottom:16px;z-index:12;display:flex;align-items:center;flex-wrap:wrap;gap:6px;max-width:calc(100vw - 32px);background:var(--navy);color:#fff;border-radius:12px;padding:8px 10px 8px 14px;box-shadow:0 12px 36px rgba(21,33,63,.35)}
+.rpbar[hidden]{display:none}
+.rpbar .rp-t{display:flex;align-items:center;gap:6px;font-weight:800;font-size:13px}
+.rpbar .rp-t svg{color:var(--lime)}
+.rpbar .rp-c{font-size:11.5px;color:#c9d1e6;margin:0 6px 0 2px;white-space:nowrap}
+.rpbar button{font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;border-radius:7px;padding:5px 10px;cursor:pointer;white-space:nowrap}
+.rpbar button:hover{background:rgba(255,255,255,.1)}
+.rpbar button.primary,.modal button.primary{background:var(--lime);border-color:var(--lime);color:var(--navy);font-weight:800}
+.form label{display:block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:10px 0 0}
+.form input:not([type=checkbox]),.form select,.form textarea,.modal input,.modal textarea{display:block;width:100%;margin-top:4px;font:inherit;font-size:13px;color:var(--ink);text-transform:none;letter-spacing:0;font-weight:500;border:1px solid var(--line);border-radius:7px;padding:6px 8px;background:#fff}
+.form input:focus,.form select:focus,.form textarea:focus,.modal input:focus,.modal textarea:focus{outline:2px solid color-mix(in srgb,var(--navy) 35%,#fff);border-color:var(--navy)}
+.form .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.form .ck{display:flex;align-items:center;gap:7px;text-transform:none;letter-spacing:0;font-size:12.5px;font-weight:600;color:var(--ink);margin-top:10px}
+.form .nudge{display:flex;gap:6px;margin-top:8px}
+.form .nudge button,.form .acts button{flex:1;font-size:12px;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 8px;cursor:pointer;color:var(--navy)}
+.form .nudge button:hover,.form .acts button:hover{border-color:var(--navy)}
+.form .acts{display:flex;gap:6px;margin-top:16px}
+.form .acts .danger{color:var(--red)}
+.form .acts .danger:hover{border-color:var(--red)}
+.form .hint{font-size:11.5px;color:var(--muted);margin-top:12px}
+.addday{margin-top:12px;font-size:12px;font-weight:700;color:#fff;background:var(--navy);border:0;border-radius:7px;padding:6px 10px;cursor:pointer}
+.modal{position:fixed;inset:0;z-index:20;background:rgba(21,33,63,.45);display:grid;place-items:center;padding:16px}
+.modal[hidden]{display:none}
+.modal .sheet{background:#fff;border-radius:14px;width:min(640px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:20px 22px;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.modal h2{margin:0;font-size:18px;color:var(--navy)}
+.modal p{margin:6px 0 10px;color:var(--muted);font-size:12.5px}
+.modal label{display:block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.modal #rpText{font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--paper);min-height:220px;resize:vertical}
+.modal .row{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.modal .row button{font-size:13px;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 14px;cursor:pointer;color:var(--navy)}
+.toast{position:fixed;left:50%;top:14px;transform:translateX(-50%);z-index:30;background:var(--ink);color:#fff;font-size:12.5px;border-radius:8px;padding:8px 14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 @media print{
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body{background:#fff}.tools,.linkbtn,.drawer,.after .art{display:none}
+  body{background:#fff}.tools,.linkbtn,.drawer,.after .art,.rpbar,.modal{display:none}
   .app{max-width:none;padding:0}.week{break-inside:avoid}
 }
 @media (max-width:1100px){
@@ -210,6 +250,19 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
     </figure>
   </div>
 </div>
+<div class="rpbar" id="rpbar" hidden>
+  <span class="rp-t" id="rpTitle"></span><span class="rp-c" id="rpCount">No changes yet</span>
+  <button id="rpAdd">+ Task</button><button id="rpAddM">+ Deadline</button><button id="rpReset">Reset</button>
+  <button class="primary" id="rpOut">Copy for Claude</button><button id="rpExit">Done</button>
+</div>
+<div class="modal" id="rpModal" hidden role="dialog" aria-modal="true" aria-labelledby="rpH"><div class="sheet">
+  <h2 id="rpH">Change request for Claude</h2>
+  <p>Copy this, paste it to Claude in the Releaf_Wiki project, and Claude will update the calendar, push it, and the live link updates for everyone.</p>
+  <label>Your name<input id="rpName" placeholder="e.g. Timmy"></label>
+  <label>Anything else Claude should know<textarea id="rpNote" rows="2" placeholder="Optional: reasons, open questions, who to check with"></textarea></label>
+  <label>Request</label><textarea id="rpText" readonly></textarea>
+  <div class="row"><button id="rpClose">Close</button><button class="primary" id="rpCopy">Copy request</button></div>
+</div></div>
 <aside class="drawer" id="drawer" aria-live="polite"><button class="x" id="dx" aria-label="Close">×</button><div id="dbody"></div></aside>
 
 <script>
@@ -228,9 +281,11 @@ const IC = {
   trophy:'<path d="M8 21h8M12 16.5V21M7 3.5h10V9a5 5 0 0 1-10 0z"/><path d="M17 5h3v1.5A3.5 3.5 0 0 1 16.8 10M7 5H4v1.5A3.5 3.5 0 0 0 7.2 10"/>',
   blot:  '<rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7.5 9h3M13.5 9h3M7.5 13h3M13.5 13h3M7.5 17h3"/>',
   flag:  '<path d="M5 21V4M5 4h12l-2.5 4.5L17 13H5"/>',
+  pen:   '<path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
   cal:   '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13.5v4M10 15.5h4"/>',
   link:  '<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',
 };
+const esc = x => String(x ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const svg = k => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
 
 /* ---------- dates ---------- */
@@ -245,15 +300,10 @@ const fmt = d => `${WD[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;
 const short = d => `${MON[d.getMonth()]} ${d.getDate()}`;
 
 const UPDATED = D('09-21');
-const START = D('09-21'), INTERNAL = D('10-01'), FREEZE = D('10-21'), VFREEZE = D('10-28'), END = D('11-16');
+const START = D('09-21'), END = D('11-16');
+let INTERNAL, FREEZE, VFREEZE, PHASES = [];
 const today = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); })();
 
-const PHASES = [
-  { id: 'draft',    name: 'Draft everything', s: START,         e: INTERNAL, c: 'var(--ph-draft)' },
-  { id: 'refine',   name: 'Refine + add data', s: add(INTERNAL,1), e: FREEZE, c: 'var(--ph-refine)' },
-  { id: 'video',    name: 'Video',            s: add(FREEZE,1),  e: VFREEZE, c: 'var(--ph-video)' },
-  { id: 'rehearse', name: 'Rehearse',         s: add(VFREEZE,1), e: END,     c: 'var(--ph-rehearse)' },
-];
 const phaseOf = d => PHASES.find(p => d >= p.s && d <= p.e);
 
 /* ---------- plan ---------- */
@@ -322,20 +372,33 @@ for (let d = D('10-03'); d <= END; d = add(d, 1)) {
 TASKS.forEach(t => { t.S = D(t.s); t.E = D(t.e); });
 
 const MILES = [
-  { d: '09-27', flag: '2× WB',        road: null,              icon: 'blot',   c: 'var(--muted)', ring: true, title: 'Western blot results', note: 'Optogenetics LPA-ACCD and bioreactor run 2' },
-  { d: '10-01', flag: 'Internal freeze', road: 'Internal freeze', icon: 'lock', c: 'var(--navy)', big: true, line: true, title: 'Internal wiki freeze', note: 'Every section owner delivers a full, fixed wiki draft with all existing data' },
-  { d: '10-10', flag: 'Video v1 due', road: 'Video v1',        icon: 'video',  c: 'var(--navy)', big: true, line: true, title: 'Presentation video v1', note: 'Full first version with every key result' },
-  { d: '10-21', flag: 'Wiki freeze',  road: 'Wiki freeze',     icon: 'lock',   c: 'var(--red)', big: true, line: true, title: 'Wiki freeze', note: 'Plant data for ACCD, LEA and BoPep4 must be in' },
-  { d: '10-28', flag: 'Video freeze', road: 'Video freeze',    icon: 'lock',   c: 'var(--red)', line: true, title: 'Presentation video freeze', note: '' },
-  { d: '11-10', flag: 'Fly to Paris', road: 'Paris',           icon: 'trip',   c: 'var(--trip)', ring: true, title: 'Flight to Paris', note: '' },
-  { d: '11-16', flag: 'Finals',       road: 'Finals',          icon: 'trophy', c: 'var(--gold)', big: true, title: 'Finalist presentation', note: 'Paris' },
+  { id: 'wb', d: '09-27', flag: '2× WB',        road: null,              icon: 'blot',   c: 'var(--muted)', ring: true, title: 'Western blot results', note: 'Optogenetics LPA-ACCD and bioreactor run 2' },
+  { id: 'int', core: true, d: '10-01', flag: 'Internal freeze', road: 'Internal freeze', icon: 'lock', c: 'var(--navy)', big: true, line: true, title: 'Internal wiki freeze', note: 'Every section owner delivers a full, fixed wiki draft with all existing data' },
+  { id: 'v1', core: true, d: '10-10', flag: 'Video v1 due', road: 'Video v1',        icon: 'video',  c: 'var(--navy)', big: true, line: true, title: 'Presentation video v1', note: 'Full first version with every key result' },
+  { id: 'wf', core: true, d: '10-21', flag: 'Wiki freeze',  road: 'Wiki freeze',     icon: 'lock',   c: 'var(--red)', big: true, line: true, title: 'Wiki freeze', note: 'Plant data for ACCD, LEA and BoPep4 must be in' },
+  { id: 'vf', core: true, d: '10-28', flag: 'Video freeze', road: 'Video freeze',    icon: 'lock',   c: 'var(--red)', line: true, title: 'Presentation video freeze', note: '' },
+  { id: 'fly', d: '11-10', flag: 'Fly to Paris', road: 'Paris',           icon: 'trip',   c: 'var(--trip)', ring: true, title: 'Flight to Paris', note: '' },
+  { id: 'fin', core: true, d: '11-16', flag: 'Finals',       road: 'Finals',          icon: 'trophy', c: 'var(--gold)', big: true, title: 'Finalist presentation', note: 'Paris' },
 ];
-MILES.forEach(m => m.D = D(m.d));
+const mile = id => MILES.find(m => m.id === id);
+function syncMiles() {
+  TASKS.forEach(t => { t.S = D(t.s); t.E = D(t.e); });
+  MILES.forEach(m => m.D = D(m.d));
+  MILES.sort((a, b) => a.D - b.D);
+  INTERNAL = mile('int').D; FREEZE = mile('wf').D; VFREEZE = mile('vf').D;
+  PHASES = [
+    { id: 'draft',    name: 'Draft everything',  s: START,            e: INTERNAL, c: 'var(--ph-draft)' },
+    { id: 'refine',   name: 'Refine + add data', s: add(INTERNAL, 1), e: FREEZE,   c: 'var(--ph-refine)' },
+    { id: 'video',    name: 'Video',             s: add(FREEZE, 1),   e: VFREEZE,  c: 'var(--ph-video)' },
+    { id: 'rehearse', name: 'Rehearse',          s: add(VFREEZE, 1),  e: END,      c: 'var(--ph-rehearse)' },
+  ];
+}
+syncMiles();
 
 const hidden = new Set();
 
 /* ---------- road strip ---------- */
-(function road() {
+function road() {
   const el = document.getElementById('road'), span = days(START, END);
   const pos = d => (days(START, d) / span * 100);
   // refine label sits right of the Video v1 node; rehearse label sits left of Paris
@@ -344,24 +407,24 @@ const hidden = new Set();
   if (today >= START && today <= END) h += `<div class="nowmark" style="left:calc(${pos(today)}% - 1px)"></div>`;
   MILES.filter(m => m.road).forEach(m => {
     const n = days(today, m.D);
-    h += `<button class="node${m.big ? ' big' : ''}" data-mile="${m.d}" style="left:${pos(m.D)}%;--nc:${m.c}">
-      <span class="lbl">${m.road}</span><span class="dot${m.ring ? ' ring' : ''}">${svg(m.icon)}</span>
+    h += `<button class="node${m.big ? ' big' : ''}" data-mile="${m.id}" style="left:${pos(m.D)}%;--nc:${m.c}">
+      <span class="lbl">${esc(m.road)}</span><span class="dot${m.ring ? ' ring' : ''}">${svg(m.icon)}</span>
       <span class="dd">${short(m.D)}${n > 0 ? ` · <b>${n}d</b>` : ''}</span></button>`;
   });
   el.innerHTML = h;
-})();
+}
 
 /* ---------- delivery callouts ---------- */
-(function callouts() {
+function callouts() {
   const left = d => { const n = days(today, d); return n > 0 ? n + ' days left' : n === 0 ? 'Today' : 'Passed'; };
   document.getElementById('callouts').innerHTML = `
-    <div class="callout"><span class="badge">${svg('lock')} Thu 1 Oct · Internal wiki freeze</span>
+    <div class="callout"><span class="badge">${svg('lock')} ${fmt(INTERNAL)} · Internal wiki freeze</span>
       <span class="msg"><b>Every owner delivers a full, fixed wiki draft</b>: results, registry, modeling, measurement, hardware.</span>
       <span class="left">${left(INTERNAL)}</span></div>
-    <div class="callout"><span class="badge">${svg('video')} Sat 10 Oct · Video v1</span>
+    <div class="callout"><span class="badge">${svg('video')} ${fmt(mile('v1').D)} · Video v1</span>
       <span class="msg"><b>Full first version, start to finish</b>, with every key result on screen.</span>
-      <span class="left">${left(D('10-10'))}</span></div>`;
-})();
+      <span class="left">${left(mile('v1').D)}</span></div>`;
+}
 
 /* ---------- legend ---------- */
 const legend = document.getElementById('legend');
@@ -376,9 +439,9 @@ LANES.forEach(l => {
   legend.appendChild(b);
 });
 legend.insertAdjacentHTML('beforeend', `<button class="linkbtn" id="all">Show all</button>
-  <span class="key"><i class="k-est"></i>striped = date assumed</span>
+  <span class="key"><i class="k-est"></i>lighter + est. = date assumed</span>
   <span class="key"><i class="k-ph"></i>top stripe = phase</span>
-  <span class="tools"><button class="tool" id="wk">${svg('flag')}This week</button><button class="tool" id="ics">${svg('cal')}Add deadlines to my calendar</button></span>`);
+  <span class="tools"><button class="tool" id="wk">${svg('flag')}This week</button><button class="tool" id="ics">${svg('cal')}Add deadlines to my calendar</button><button class="tool rp" id="rpBtn">${svg('pen')}Replan</button></span>`);
 document.getElementById('all').onclick = () => { hidden.clear(); render(); };
 
 /* ---------- calendar ---------- */
@@ -426,7 +489,7 @@ function renderWeek(w, isSprint) {
     if (out) { head += '<div class="dh"></div>'; continue; }
     const first = i === 0 || d.getDate() === 1;
     const flags = MILES.filter(m => same(m.D, d)).map(m =>
-        `<button class="flag${m.ring ? ' ring' : ''}" style="--fc:${m.c}" data-mile="${m.d}" title="${m.title}">${svg(m.icon)}<span>${m.flag}</span></button>`)
+        `<button class="flag${m.ring ? ' ring' : ''}${mileEdited(m) ? ' edited' : ''}" style="--fc:${m.c}" data-mile="${m.id}" title="${esc(m.title)}">${svg(m.icon)}<span>${esc(m.flag)}</span></button>`)
       .concat(hidden.has('mock') ? [] : TASKS.filter(t => t.badge && same(t.S, d)).map(t =>
         `<button class="flag mock" data-task="${t.id}" title="Judging mock, 1–2 h">${svg('mock')}<span>Mock</span></button>`));
     const ph = phaseOf(d);
@@ -434,9 +497,9 @@ function renderWeek(w, isSprint) {
   }
   const bars = w.segs.map(g => {
     const t = g.t, cls = ['bar'];
-    if (t.est) cls.push('est'); if (g.cl) cls.push('cl'); if (g.cr) cls.push('cr');
-    const tail = !g.cr ? (t.must ? '<span class="must">MUST</span>' : t.end ? `<span class="end">${t.end}</span>` : '') : '';
-    return `<button class="${cls.join(' ')}" data-task="${t.id}" style="--c:var(--${t.lane});grid-column:${g.c + 1}/span ${g.n};grid-row:${g.row + 1}" title="${t.title} · ${fmt(t.S)}${t.s !== t.e ? ' → ' + fmt(t.E) : ''}">${g.cl ? '' : svg(t.lane)}<span class="t">${t.title}</span>${tail}</button>`;
+    if (t.est) cls.push('est'); if (g.cl) cls.push('cl'); if (g.cr) cls.push('cr'); if (taskEdited(t)) cls.push('edited');
+    const tail = !g.cr ? (t.est ? '<span class="estt">est.</span>' : '') + (t.must ? '<span class="must">MUST</span>' : t.end ? `<span class="end">${esc(t.end)}</span>` : '') : '';
+    return `<button class="${cls.join(' ')}" data-task="${t.id}" style="--c:var(--${t.lane});grid-column:${g.c + 1}/span ${g.n};grid-row:${g.row + 1}" title="${esc(t.title)} · ${fmt(t.S)}${t.s !== t.e ? ' → ' + fmt(t.E) : ''}">${g.cl ? '' : svg(t.lane)}<span class="t">${esc(t.title)}</span>${tail}</button>`;
   }).join('');
   el.innerHTML = `<div class="cells">${cells}</div><div class="head">${head}</div><div class="bars">${bars}</div>`;
   el._rows = w.rows;
@@ -449,6 +512,7 @@ function renderCal(host, starts, isSprint) {
 }
 
 function render() {
+  syncMiles(); road(); callouts();
   legend.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(!hidden.has(c.dataset.lane))));
   renderCal(sprintEl, SPRINT_WEEKS, true);
   renderCal(afterEl, AFTER_WEEKS, false);
@@ -478,9 +542,9 @@ addEventListener('resize', layout);
 const drawer = document.getElementById('drawer'), dbody = document.getElementById('dbody');
 const close = () => { if (drawer.classList.contains('open')) setHash(''); drawer.classList.remove('open'); };
 document.getElementById('dx').onclick = close;
-addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!rpModal.hidden) rpModal.hidden = true; else close(); });
 const spanTxt = t => t.s === t.e ? fmt(t.S) : `${fmt(t.S)} → ${fmt(t.E)} · ${days(t.S, t.E) + 1} days`;
-const row = t => `<button class="d-row" data-task="${t.id}" style="--c:var(--${t.lane})"><span class="ic">${svg(t.lane)}</span><span>${t.title}<small>${laneOf(t.lane).name} · ${spanTxt(t)}</small></span></button>`;
+const row = t => `<button class="d-row" data-task="${t.id}" style="--c:var(--${t.lane})"><span class="ic">${svg(t.lane)}</span><span>${esc(t.title)}<small>${laneOf(t.lane).name} · ${spanTxt(t)}</small></span></button>`;
 
 function status(t) {
   if (t.E < today) return ['Done by schedule', '#667085'];
@@ -493,17 +557,17 @@ const setHash = h => history.replaceState(null, '', h ? '#' + h : location.pathn
 function showTask(id) {
   const t = TASKS.find(x => x.id === id); if (!t) return;
   const l = laneOf(t.lane);
-  const deps = (t.dep || []).map(i => TASKS.find(x => x.id === i));
+  const deps = (t.dep || []).map(i => TASKS.find(x => x.id === i)).filter(Boolean);
   const unblocks = TASKS.filter(x => (x.dep || []).includes(t.id));
   const [st, sc] = status(t);
   drawer.style.setProperty('--c', `var(--${t.lane})`);
   dbody.innerHTML = `
-    <div class="d-top"><div class="d-lane">${svg(t.lane)}${l.name}</div><h2>${t.title}</h2><div class="d-when">${spanTxt(t)}</div>
+    <div class="d-top"><div class="d-lane">${svg(t.lane)}${l.name}</div><h2>${esc(t.title)}</h2><div class="d-when">${spanTxt(t)}</div>
     <span class="status" style="--st:${sc}"><i></i>${st}</span>${t.must ? '<span class="d-tag must">MUST deliver</span>' : ''}${t.est ? '<span class="d-tag est">Dates partly assumed</span>' : ''}
     <div>${copyBtn()}</div></div>
     <div class="d-in">
-    ${t.who ? `<div class="d-sec">Who</div><div>${t.who}</div>` : ''}
-    <div class="d-sec">Notes</div><ul>${t.notes.map(n => `<li>${n}</li>`).join('')}</ul>
+    ${t.who ? `<div class="d-sec">Who</div><div>${esc(t.who)}</div>` : ''}
+    ${t.notes.length ? `<div class="d-sec">Notes</div><ul>${t.notes.map(n => `<li>${esc(n)}</li>`).join('')}</ul>` : ''}
     ${deps.length ? `<div class="d-sec">Needs first</div>${deps.map(row).join('')}` : ''}
     ${unblocks.length ? `<div class="d-sec">Unblocks</div>${unblocks.map(row).join('')}` : ''}</div>`;
   setHash('t=' + t.id);
@@ -520,9 +584,10 @@ function showDay(d) {
   dbody.innerHTML = `
     <div class="d-top"><div class="d-lane">Phase · ${ph ? ph.name : ''}</div><h2>${fmt(d)}</h2><div class="d-when">${count}</div><div>${copyBtn()}</div></div>
     <div class="d-in">
-    ${ms.length ? '<div class="d-sec">Deadline</div>' + ms.map(m => `<div class="d-row" style="--c:${m.c};cursor:default"><span class="ic">${svg(m.icon)}</span><span><b>${m.title}</b>${m.note ? `<small>${m.note}</small>` : ''}</span></div>`).join('') : ''}
+    ${ms.length ? '<div class="d-sec">Deadline</div>' + ms.map(m => `<div class="d-row" style="--c:${m.c};cursor:default"><span class="ic">${svg(m.icon)}</span><span><b>${esc(m.title)}</b>${m.note ? `<small>${esc(m.note)}</small>` : ''}</span></div>`).join('') : ''}
     <div class="d-sec">Running this day</div>
-    ${ts.length ? ts.map(row).join('') : '<div class="d-row" style="cursor:default;color:var(--muted)">Nothing scheduled</div>'}</div>`;
+    ${ts.length ? ts.map(row).join('') : '<div class="d-row" style="cursor:default;color:var(--muted)">Nothing scheduled</div>'}
+    ${editing ? `<button class="addday" data-addday="${md(d)}">+ Add a task starting ${fmt(d)}</button>` : ''}</div>`;
   drawer.classList.add('open');
 }
 
@@ -536,7 +601,7 @@ function showWeek() {
   drawer.style.setProperty('--c', 'var(--navy)');
   dbody.innerHTML = `
     <div class="d-top"><div class="d-lane">${svg('flag')}This week</div><h2>${short(from)} – ${short(to)}</h2>
-    <div class="d-when">${next ? `Next deadline: <b>${next.title}</b>, ${fmt(next.D)} (${days(from, next.D) === 0 ? 'today' : 'in ' + days(from, next.D) + ' days'})` : ''}</div></div>
+    <div class="d-when">${next ? `Next deadline: <b>${esc(next.title)}</b>, ${fmt(next.D)} (${days(from, next.D) === 0 ? 'today' : 'in ' + days(from, next.D) + ' days'})` : ''}</div></div>
     <div class="d-in">
     ${due.length ? `<div class="d-sec">Due in the next 7 days</div>${due.map(row).join('')}` : ''}
     ${now.length ? `<div class="d-sec">Running now</div>${now.map(row).join('')}` : ''}
@@ -548,7 +613,7 @@ function showWeek() {
 
 function downloadIcs() {
   const d8 = d => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
-  const ev = MILES.map(m => ['BEGIN:VEVENT', `UID:releaf-${m.d}@releaf-final-sprint`, `DTSTAMP:${d8(new Date())}T000000Z`,
+  const ev = MILES.map(m => ['BEGIN:VEVENT', `UID:releaf-${m.id}@releaf-final-sprint`, `DTSTAMP:${d8(new Date())}T000000Z`,
     `DTSTART;VALUE=DATE:${d8(m.D)}`, `DTEND;VALUE=DATE:${d8(add(m.D, 1))}`, `SUMMARY:Releaf · ${m.title}`,
     `DESCRIPTION:${(m.note || '').replace(/,/g, '\\,')}`, 'END:VEVENT'].join('\r\n'));
   const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Releaf//Final sprint//EN', 'CALSCALE:GREGORIAN', ...ev, 'END:VCALENDAR'].join('\r\n');
@@ -563,10 +628,13 @@ document.getElementById('ics').onclick = downloadIcs;
 document.addEventListener('click', e => {
   const cp = e.target.closest('#copy');
   if (cp) { navigator.clipboard && navigator.clipboard.writeText(location.href).then(() => { cp.querySelector('span').textContent = 'Link copied'; }); return; }
-  const tk = e.target.closest('[data-task]'); if (tk) { showTask(tk.dataset.task); return; }
-  const mi = e.target.closest('[data-mile]'); if (mi) { showDay(D(mi.dataset.mile)); return; }
+  const ad = e.target.closest('[data-addday]'); if (ad) { addTask(ad.dataset.addday); return; }
+  const tk = e.target.closest('[data-task]');
+  if (tk) { const t = TASKS.find(x => x.id === tk.dataset.task); if (editing && t && !t.badge) editTask(t.id); else showTask(tk.dataset.task); return; }
+  const mi = e.target.closest('[data-mile]');
+  if (mi) { const m = mile(mi.dataset.mile); if (!m) return; if (editing) editMile(m.id); else showDay(m.D); return; }
   const c = e.target.closest('.cell[data-day]'); if (c && c.dataset.day) { showDay(new Date(+c.dataset.day)); return; }
-  if (!e.target.closest('.drawer') && !e.target.closest('.legend')) close();
+  if (!e.target.closest('.drawer, .legend, .rpbar, .modal')) close();
 });
 cal.forEach(c => {
   c.addEventListener('mouseover', e => {
@@ -581,7 +649,204 @@ cal.forEach(c => {
   });
 });
 
-render();
+/* ---------- Replan: edit locally, then hand Claude a plain-language change request ---------- */
+const REPO = 'Timmy97-TW/releaf-final-sprint', LIVE = 'https://timmy97-tw.github.io/releaf-final-sprint/';
+const KEY = 'releaf-replan-v1';
+const clone = o => JSON.parse(JSON.stringify(o));
+const md = d => `${d.getMonth() + 1 < 10 ? '0' : ''}${d.getMonth() + 1}-${d.getDate() < 10 ? '0' : ''}${d.getDate()}`;
+const iso = s => `${Y}-${s}`;
+const clampD = d => d < START ? START : d > END ? END : d;
+const strip = o => { const c = { ...o }; delete c.S; delete c.E; delete c.D; return c; };
+const ORIG_T = clone(TASKS.filter(t => !t.badge).map(strip));
+const ORIG_M = clone(MILES.map(strip));
+const pickT = t => ({ title: t.title, lane: t.lane, s: t.s, e: t.e, must: !!t.must, est: !!t.est, who: t.who || '', notes: (t.notes || []).join('\n') });
+const pickM = m => ({ title: m.title, d: m.d });
+const origT = id => ORIG_T.find(x => x.id === id), origM = id => ORIG_M.find(x => x.id === id);
+function taskEdited(t) { if (!editing && !hasChanges()) return false; const o = origT(t.id); return !o || JSON.stringify(pickT(o)) !== JSON.stringify(pickT(t)); }
+function mileEdited(m) { if (!editing && !hasChanges()) return false; const o = origM(m.id); return !o || JSON.stringify(pickM(o)) !== JSON.stringify(pickM(m)); }
+const SIG = (() => { let h = 0; const str = JSON.stringify([ORIG_T, ORIG_M]); for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) | 0; return String(h); })();
+let editing = false;
+const rp = { name: '', note: '' };
+const $ = id => document.getElementById(id);
+const rpBar = $('rpbar'), rpModal = $('rpModal');
+
+function toast(msg) { const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 2600); }
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify({ sig: SIG, editing, tasks: TASKS.filter(t => !t.badge).map(strip), miles: MILES.map(strip), name: rp.name, note: rp.note })); } catch (e) {}
+}
+function load() {
+  let st; try { st = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { st = null; }
+  if (!st) return;
+  if (st.sig !== SIG) { try { localStorage.removeItem(KEY); } catch (e) {} toast('The plan was updated since your last Replan, so your old local edits were cleared.'); return; }
+  replaceState(st.tasks, st.miles); rp.name = st.name || ''; rp.note = st.note || '';
+  if (st.editing) setEditing(true);
+}
+function replaceState(tasks, miles) {
+  const badges = TASKS.filter(t => t.badge);
+  TASKS.splice(0, TASKS.length, ...clone(tasks), ...badges);
+  MILES.splice(0, MILES.length, ...clone(miles));
+}
+
+/* the change list, in plain words */
+const rng = (s, e) => s === e ? fmt(D(s)) : `${fmt(D(s))} – ${fmt(D(e))}`;
+const L = id => laneOf(id).name;
+function changes() {
+  const out = [], cur = TASKS.filter(t => !t.badge);
+  ORIG_M.forEach(o => {
+    const m = mile(o.id);
+    if (!m) { out.push(`Remove the deadline "${o.title}" (${fmt(D(o.d))}).`); return; }
+    const p = [];
+    if (m.title !== o.title) p.push(`rename it to "${m.title}"`);
+    if (m.d !== o.d) p.push(`move it from ${fmt(D(o.d))} to ${fmt(D(m.d))}`);
+    if (p.length) out.push(`Deadline "${o.title}": ${p.join(', and ')}.`);
+  });
+  MILES.filter(m => !origM(m.id)).forEach(m => out.push(`Add a new deadline "${m.title}" on ${fmt(D(m.d))}.`));
+  ORIG_T.forEach(o => {
+    const t = cur.find(x => x.id === o.id);
+    if (!t) { out.push(`Remove the task "${o.title}" (${L(o.lane)}, ${rng(o.s, o.e)}).`); return; }
+    const a = pickT(o), b = pickT(t), p = [];
+    if (b.title !== a.title) p.push(`rename it to "${b.title}"`);
+    if (b.lane !== a.lane) p.push(`move it from ${L(a.lane)} to ${L(b.lane)}`);
+    if (b.s !== a.s || b.e !== a.e) p.push(`change the dates from ${rng(a.s, a.e)} to ${rng(b.s, b.e)}`);
+    if (b.must !== a.must) p.push(b.must ? 'mark it as MUST deliver' : 'remove its MUST tag');
+    if (b.est !== a.est) p.push(b.est ? 'mark its dates as assumed' : 'mark its dates as confirmed');
+    if (b.who !== a.who) p.push(b.who ? `set who is on it to ${b.who}` : 'clear who is on it');
+    if (b.notes !== a.notes) p.push(b.notes.trim() ? `replace its notes with: ${b.notes.split('\n').filter(Boolean).map(x => `"${x.trim()}"`).join('; ')}` : 'remove its notes');
+    if (p.length) out.push(`Task "${o.title}" (${L(o.lane)}): ${p.join('; ')}.`);
+  });
+  cur.filter(t => !origT(t.id)).forEach(t => {
+    const b = pickT(t), notes = b.notes.split('\n').map(x => x.trim()).filter(Boolean);
+    out.push(`Add a new task "${b.title}" to ${L(b.lane)}, ${rng(b.s, b.e)}${b.must ? ', MUST deliver' : ''}${b.est ? ', dates assumed' : ''}${b.who ? `, with ${b.who} on it` : ''}${notes.length ? `, notes: ${notes.map(x => `"${x}"`).join('; ')}` : ''}.`);
+  });
+  return out;
+}
+const hasChanges = () => { try { return changes().length > 0; } catch (e) { return false; } };
+function request() {
+  const ch = changes(), who = rp.name.trim() || 'A team member';
+  const lines = [`Update the Releaf "Road to Paris" sprint calendar (GitHub repo ${REPO}, file index.html; local copy in Releaf_Wiki/releaf-final-sprint). ${who} made these changes in Replan on ${fmt(today)}, starting from the plan dated ${fmt(UPDATED)}:`, ''];
+  ch.forEach((c, i) => lines.push(`${i + 1}. ${c}`));
+  if (!ch.length) lines.push('(No changes yet.)');
+  if (rp.note.trim()) lines.push('', `Note from ${who}: ${rp.note.trim()}`);
+  lines.push('', `Apply these changes to the TASKS and MILES data only, keep everything else on the page as it is, and set UPDATED to today. If a change conflicts with another task or a deadline, ask me before applying it. Then commit, push, and confirm that ${LIVE} shows the changes.`);
+  return lines.join('\n');
+}
+
+function refresh() {
+  const n = changes().length;
+  $('rpCount').textContent = n ? `${n} change${n > 1 ? 's' : ''} · saved in this browser` : 'No changes yet';
+  $('rpBtn').innerHTML = `${svg('pen')}Replan${n && !editing ? ` <b>${n}</b>` : ''}`;
+  if (!rpModal.hidden) $('rpText').value = request();
+  save();
+}
+function commit() { render(); refresh(); }
+function setEditing(on) {
+  editing = on; document.body.classList.toggle('editing', on);
+  rpBar.hidden = !on; close(); commit();
+  if (on && !hasChanges()) toast('Replan is on: click any bar or deadline to edit it.');
+}
+$('rpTitle').innerHTML = `${svg('pen')} Replan`;
+
+/* task editor */
+function editTask(id) {
+  const t = TASKS.find(x => x.id === id); if (!t) return;
+  const o = origT(id);
+  drawer.style.setProperty('--c', `var(--${t.lane})`);
+  dbody.innerHTML = `
+    <div class="d-top"><div class="d-lane">${svg('pen')}Replan · ${o ? 'edit task' : 'new task'}</div><h2 id="f-h">${esc(t.title)}</h2><div class="d-when" id="f-when">${spanTxt(t)}</div></div>
+    <div class="d-in form">
+      <label>Task name<input id="f-title" value="${esc(t.title)}"></label>
+      <label>Theme<select id="f-lane">${LANES.filter(l => l.id !== 'mock').map(l => `<option value="${l.id}"${l.id === t.lane ? ' selected' : ''}>${l.name}</option>`).join('')}</select></label>
+      <div class="two"><label>Start<input type="date" id="f-s" value="${iso(t.s)}" min="${iso(md(START))}" max="${iso(md(END))}"></label>
+      <label>End<input type="date" id="f-e" value="${iso(t.e)}" min="${iso(md(START))}" max="${iso(md(END))}"></label></div>
+      <div class="nudge"><button data-shift="-1">◀ Whole task 1 day earlier</button><button data-shift="1">1 day later ▶</button></div>
+      <label class="ck"><input type="checkbox" id="f-must"${t.must ? ' checked' : ''}> MUST deliver</label>
+      <label class="ck"><input type="checkbox" id="f-est"${t.est ? ' checked' : ''}> Dates are assumed (shows lighter, tagged est.)</label>
+      <label>Who is on it<input id="f-who" value="${esc(t.who || '')}" placeholder="Names, optional"></label>
+      <label>Notes · one per line<textarea id="f-notes" rows="4">${esc((t.notes || []).join('\n'))}</textarea></label>
+      <div class="acts">${o ? '<button id="f-undo">Undo changes to this task</button>' : ''}<button class="danger" id="f-del">Delete task</button></div>
+      <p class="hint">Changes show on the calendar right away and stay in this browser. Use “Copy for Claude” to make them official.</p>
+    </div>`;
+  const upd = () => { $('f-h').textContent = t.title; $('f-when').textContent = spanTxt(t); drawer.style.setProperty('--c', `var(--${t.lane})`); commit(); };
+  const setDates = (s, e) => {
+    let S = clampD(s), E = clampD(e); if (E < S) E = S;
+    t.s = md(S); t.e = md(E); $('f-s').value = iso(t.s); $('f-e').value = iso(t.e); upd();
+  };
+  const fromIso = v => { const [y, m, d] = v.split('-').map(Number); return new Date(y, m - 1, d); };
+  $('f-title').oninput = e => { t.title = e.target.value || 'Untitled task'; upd(); };
+  $('f-lane').onchange = e => { t.lane = e.target.value; upd(); };
+  $('f-s').onchange = e => { if (!e.target.value) return; const S = fromIso(e.target.value); const len = days(D(t.s), D(t.e)); setDates(S, D(t.e) < S ? add(S, len) : D(t.e)); };
+  $('f-e').onchange = e => { if (e.target.value) setDates(D(t.s), fromIso(e.target.value)); };
+  dbody.querySelectorAll('[data-shift]').forEach(b => b.onclick = () => { const n = +b.dataset.shift; setDates(add(D(t.s), n), add(D(t.e), n)); });
+  $('f-must').onchange = e => { t.must = e.target.checked; upd(); };
+  $('f-est').onchange = e => { t.est = e.target.checked; upd(); };
+  $('f-who').oninput = e => { t.who = e.target.value; upd(); };
+  $('f-notes').oninput = e => { t.notes = e.target.value.split('\n'); upd(); };
+  if (o) $('f-undo').onclick = () => { Object.assign(t, clone(o)); commit(); editTask(id); };
+  $('f-del').onclick = () => {
+    if (!confirm(`Delete "${t.title}"?`)) return;
+    TASKS.splice(TASKS.indexOf(t), 1);
+    TASKS.forEach(x => { if (x.dep) x.dep = x.dep.filter(d => d !== id); });
+    close(); commit();
+  };
+  drawer.classList.add('open');
+  setTimeout(() => $('f-title').focus(), 50);
+}
+function addTask(startMd) {
+  const S = startMd ? D(startMd) : clampD(today);
+  const t = { id: 'n' + Date.now().toString(36), lane: 'wiki', title: 'New task', s: md(S), e: md(clampD(add(S, 2))), notes: [] };
+  TASKS.push(t); commit(); editTask(t.id);
+  setTimeout(() => $('f-title').select(), 60);
+}
+
+/* deadline editor */
+function editMile(id) {
+  const m = mile(id); if (!m) return;
+  const o = origM(id);
+  drawer.style.setProperty('--c', m.c);
+  dbody.innerHTML = `
+    <div class="d-top"><div class="d-lane">${svg('pen')}Replan · ${o ? 'edit deadline' : 'new deadline'}</div><h2 id="f-h">${esc(m.title)}</h2><div class="d-when" id="f-when">${fmt(D(m.d))}</div></div>
+    <div class="d-in form">
+      <label>Deadline name<input id="f-title" value="${esc(m.title)}"></label>
+      <label>Date<input type="date" id="f-d" value="${iso(m.d)}" min="${iso(md(START))}" max="${iso(md(END))}"></label>
+      <div class="nudge"><button data-shift="-1">◀ 1 day earlier</button><button data-shift="1">1 day later ▶</button></div>
+      <div class="acts">${o ? '<button id="f-undo">Undo changes</button>' : ''}${m.core ? '' : '<button class="danger" id="f-del">Delete deadline</button>'}</div>
+      <p class="hint">${m.core ? 'This is a core deadline: you can move or rename it, and the phases on the timeline follow it.' : 'Changes show right away and stay in this browser.'}</p>
+    </div>`;
+  const upd = () => { $('f-h').textContent = m.title; $('f-when').textContent = fmt(D(m.d)); commit(); };
+  const setD = d => { m.d = md(clampD(d)); $('f-d').value = iso(m.d); upd(); };
+  $('f-title').oninput = e => { m.title = e.target.value || 'Untitled deadline'; m.flag = m.title; if (m.road !== null && m.road !== undefined) m.road = m.title; upd(); };
+  $('f-d').onchange = e => { if (!e.target.value) return; const [y, mo, d] = e.target.value.split('-').map(Number); setD(new Date(y, mo - 1, d)); };
+  dbody.querySelectorAll('[data-shift]').forEach(b => b.onclick = () => setD(add(D(m.d), +b.dataset.shift)));
+  if (o) $('f-undo').onclick = () => { Object.assign(m, clone(o)); commit(); editMile(id); };
+  if (!m.core) $('f-del').onclick = () => { if (!confirm(`Delete "${m.title}"?`)) return; MILES.splice(MILES.indexOf(m), 1); close(); commit(); };
+  drawer.classList.add('open');
+}
+function addMile() {
+  const S = clampD(today);
+  const m = { id: 'x' + Date.now().toString(36), d: md(S), flag: 'New deadline', road: 'New deadline', icon: 'flag', c: 'var(--navy)', ring: true, title: 'New deadline', note: '' };
+  MILES.push(m); commit(); editMile(m.id);
+  setTimeout(() => $('f-title').select(), 60);
+}
+
+$('rpBtn').onclick = e => { e.stopPropagation(); setEditing(!editing); };
+$('rpExit').onclick = () => setEditing(false);
+$('rpAdd').onclick = () => addTask();
+$('rpAddM').onclick = () => addMile();
+$('rpReset').onclick = () => { if (!hasChanges() || confirm('Throw away all your local changes and go back to the published plan?')) { replaceState(ORIG_T, ORIG_M); close(); commit(); } };
+$('rpOut').onclick = () => { $('rpName').value = rp.name; $('rpNote').value = rp.note; $('rpText').value = request(); rpModal.hidden = false; };
+$('rpClose').onclick = () => { rpModal.hidden = true; };
+rpModal.onclick = e => { if (e.target === rpModal) rpModal.hidden = true; };
+$('rpName').oninput = e => { rp.name = e.target.value; refresh(); };
+$('rpNote').oninput = e => { rp.note = e.target.value; refresh(); };
+$('rpCopy').onclick = () => {
+  const txt = request();
+  const done = () => { $('rpCopy').textContent = 'Copied ✓'; setTimeout(() => $('rpCopy').textContent = 'Copy request', 1800); };
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, () => { $('rpText').select(); document.execCommand('copy'); done(); });
+  else { $('rpText').select(); document.execCommand('copy'); done(); }
+};
+
+load();
+render(); refresh();
 document.getElementById('upd').textContent = 'plan updated ' + short(UPDATED);
 (function openFromHash() {
   const h = location.hash.slice(1);
