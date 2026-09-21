@@ -3,142 +3,227 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Releaf Final Sprint</title>
-<meta name="description" content="Releaf iGEM 2026 calendar from 21 Sep to the 16 Nov finals: wiki freeze 21 Oct, video freeze 28 Oct.">
+<meta name="color-scheme" content="light">
+<title>Releaf Road to Paris</title>
+<meta name="description" content="Releaf (GEMs Taiwan, iGEM 2026) sprint calendar: internal wiki freeze 1 Oct, wiki freeze 21 Oct, video freeze 28 Oct, finals in Paris 16 Nov.">
+<link rel="icon" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f5f6f8; --panel:#ffffff; --ink:#191d23; --muted:#687080; --line:#e3e6eb; --line-strong:#cfd4dc;
-  --weekend:#f6f7f9; --post:#eceef2; --today:#2563eb; --freeze:#d62828; --bar-ink:#ffffff;
-  --opto:#7b4ce0; --bio:#0c9483; --sw:#2c6bd9; --plant:#3a8f38; --bopep:#e06a00;
-  --wiki:#3d4858; --video:#cf2f6a; --mock:#a67c00; --trip:#b3261e;
-  --shadow:0 10px 40px rgba(20,24,32,.18);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#111418; --panel:#181c22; --ink:#e8ebf0; --muted:#98a1ae; --line:#2a3039; --line-strong:#3a424e;
-    --weekend:#15191e; --post:#1d2229; --today:#6ea0ff; --freeze:#ff5a52;
-    --opto:#8b62ee; --bio:#149e8c; --sw:#3a78e4; --plant:#3f9a3c; --bopep:#e87a14;
-    --wiki:#5b687b; --video:#d8467c; --mock:#b58a0a; --trip:#cf3a31; --shadow:0 10px 40px rgba(0,0,0,.5);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#111418; --panel:#181c22; --ink:#e8ebf0; --muted:#98a1ae; --line:#2a3039; --line-strong:#3a424e;
-  --weekend:#15191e; --post:#1d2229; --today:#6ea0ff; --freeze:#ff5a52;
-  --opto:#8b62ee; --bio:#149e8c; --sw:#3a78e4; --plant:#3f9a3c; --bopep:#e87a14;
-  --wiki:#5b687b; --video:#d8467c; --mock:#b58a0a; --trip:#cf3a31; --shadow:0 10px 40px rgba(0,0,0,.5);
+  color-scheme:light;
+  /* ground, from the team logo: deep navy + seedling lime on warm paper */
+  --paper:#f8f8f3; --panel:#ffffff; --ink:#15213f; --muted:#6a7185; --line:#e6e6de; --line-soft:#efefe9;
+  --navy:#1b2a5c; --lime:#8cc63f; --lime-soft:#eef6e0; --red:#d9362b;
+  /* phases */
+  --ph-draft:#8cc63f; --ph-refine:#5b8def; --ph-video:#d4507f; --ph-rehearse:#d6a21e;
+  /* themes */
+  --opto:#7457d6; --bio:#0f8f86; --sw:#2f73d0; --plant:#4f9a2a; --bopep:#e0721a;
+  --wiki:#1b2a5c; --video:#d4507f; --mock:#c28f12; --trip:#d9362b;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font:13px/1.35 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body{background:var(--paper);color:var(--ink);font:13px/1.35 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit}
-.app{padding:12px 16px 24px;max-width:1600px;margin:0 auto}
+svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.app{padding:10px 16px 28px;max-width:1640px;margin:0 auto}
 
-/* header */
-.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px;margin-bottom:8px}
-h1{font-size:17px;font-weight:700;margin:0;letter-spacing:-.01em}
-.sub{color:var(--muted);font-size:12px;margin-top:2px}
-.count{display:flex;flex-wrap:wrap;gap:6px}
-.count span{font-size:11.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap}
-.count b{color:var(--ink);font-weight:600}
-.count .hot b{color:var(--freeze)}
+/* ---------- header ---------- */
+.top{display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:14px 18px;margin-bottom:8px}
+.logo{width:52px;height:52px;border-radius:50%;display:block;box-shadow:0 2px 8px rgba(27,42,92,.25)}
+.brand h1{font-size:19px;font-weight:800;margin:0;letter-spacing:-.02em;color:var(--navy);line-height:1.1}
+.brand h1 span{color:var(--lime);-webkit-text-stroke:.3px var(--navy)}
+.brand .sub{color:var(--muted);font-size:11.5px;margin-top:3px;white-space:nowrap}
+
+/* road-to-paris strip */
+.road{position:relative;height:58px;min-width:0;margin:0 18px 0 8px}
+.track{position:absolute;left:0;right:0;top:25px;height:12px;border-radius:6px;overflow:hidden;display:flex;background:var(--line)}
+.seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;white-space:nowrap;overflow:hidden}
+.node{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;width:78px;pointer-events:auto;cursor:pointer;background:none;border:0;padding:0}
+.node .lbl{font-size:10px;font-weight:700;white-space:nowrap;color:var(--nc);line-height:12px;height:12px}
+.node .dot{margin-top:3px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--nc);color:#fff;font-size:13px;box-shadow:0 0 0 3px var(--paper)}
+.node .dot.ring{background:#fff;color:var(--nc);box-shadow:inset 0 0 0 2px var(--nc),0 0 0 3px var(--paper)}
+.node .dd{font-size:9.5px;color:var(--muted);margin-top:2px;white-space:nowrap}
+.node .dd b{color:var(--ink)}
+.node.big .dot{width:28px;height:28px;margin-top:1px;font-size:15px}
+.nowmark{position:absolute;top:21px;width:2px;height:20px;background:var(--ink);border-radius:1px}
+.nowmark::after{content:"today";position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.06em}
+
+/* internal freeze callout */
+.callout{display:flex;align-items:center;gap:12px;background:var(--navy);color:#fff;border-radius:10px;padding:7px 12px;margin-bottom:8px;position:relative;overflow:hidden}
+.callout .badge{display:flex;align-items:center;gap:6px;background:var(--lime);color:var(--navy);font-weight:800;font-size:12px;border-radius:6px;padding:4px 9px;white-space:nowrap}
+.callout .badge svg{font-size:14px}
+.callout .msg{font-size:12.5px;line-height:1.3;min-width:0}
+.callout .msg b{color:var(--lime)}
+.callout .parts{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+.callout .parts span{font-size:10.5px;font-weight:600;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.callout .left{font-size:11px;font-weight:700;background:rgba(255,255,255,.12);border-radius:6px;padding:4px 8px;white-space:nowrap}
+
+/* legend */
 .legend{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:8px}
-.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:3px 8px;font-size:12px;cursor:pointer;user-select:none}
-.chip i{width:9px;height:9px;border-radius:2px;background:var(--c)}
-.chip[aria-pressed="false"]{opacity:.42}
-.chip[aria-pressed="false"] i{background:transparent;box-shadow:inset 0 0 0 1.5px var(--c)}
-.chip:hover{border-color:var(--line-strong)}
-.legend .hint{color:var(--muted);font-size:11.5px;margin-left:6px}
-.legend .est-key{display:inline-block;width:22px;height:9px;border-radius:2px;vertical-align:-1px;margin-right:4px;background:var(--muted);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.55) 0 3px,transparent 3px 6px)}
-.linkbtn{background:none;border:0;padding:3px 4px;color:var(--today);cursor:pointer;font-size:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 10px 3px 4px;font-size:12px;font-weight:500;cursor:pointer;user-select:none}
+.chip .ic{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font-size:12px}
+.chip[aria-pressed="false"]{opacity:.4}
+.chip[aria-pressed="false"] .ic{background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.chip:hover{border-color:color-mix(in srgb,var(--c) 45%,#fff)}
+.chip.star{border-color:color-mix(in srgb,var(--bopep) 45%,#fff)}
+.linkbtn{background:none;border:0;padding:3px 6px;color:var(--sw);cursor:pointer;font-size:12px;font-weight:500}
+.key{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-left:8px}
+.key i{display:inline-block;width:22px;height:10px;border-radius:3px}
+.key .k-est{border:1.5px dashed var(--muted);background:#fff}
+.key .k-ph{background:linear-gradient(90deg,var(--ph-draft) 0 25%,var(--ph-refine) 25% 50%,var(--ph-video) 50% 75%,var(--ph-rehearse) 75%);height:4px;width:28px;border-radius:2px}
 
-/* calendar */
-.cal{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.dow{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--line)}
-.dow div{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:5px 8px}
+/* ---------- calendar ---------- */
+.cal{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(21,33,63,.04)}
+.dow{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--line);background:var(--paper)}
+.dow div{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:5px 9px}
+.dow div:nth-child(n+6){color:var(--mock)}
 .week{position:relative;border-bottom:1px solid var(--line)}
 .week:last-child{border-bottom:0}
 .cells{position:absolute;inset:0;display:grid;grid-template-columns:repeat(7,1fr)}
-.cell{border-right:1px solid var(--line);cursor:pointer}
+.cell{border-right:1px solid var(--line-soft);cursor:pointer;position:relative}
 .cell:last-child{border-right:0}
-.cell.we{background:var(--weekend)}
-.cell.post{background:var(--post);background-image:repeating-linear-gradient(135deg,transparent 0 7px,rgba(127,127,127,.07) 7px 8px)}
-.cell.out{background:var(--bg);cursor:default}
-.cell.freeze{box-shadow:inset -3px 0 0 var(--freeze)}
-.cell.today{box-shadow:inset 0 0 0 2px var(--today)}
-.cell:hover:not(.out){background-color:color-mix(in srgb,var(--today) 5%,transparent)}
-.head{position:relative;display:grid;grid-template-columns:repeat(7,1fr);height:22px;pointer-events:none}
-.dh{display:flex;align-items:center;gap:4px;padding:0 5px 0 7px;min-width:0}
-.num{font-size:11.5px;font-weight:600;color:var(--muted);flex:none}
-.num .mo{font-weight:700;color:var(--ink);margin-right:3px}
-.dh.is-today .num{color:#fff;background:var(--today);border-radius:4px;padding:0 4px}
-.dh.is-today .num .mo{color:#fff}
+.cell.we{background:#fbfaf4}
+.cell.post{background:#f1f1ec;background-image:repeating-linear-gradient(135deg,transparent 0 7px,rgba(21,33,63,.045) 7px 8px)}
+.cell.out{background:var(--paper);cursor:default}
+.cell.today{background:var(--lime-soft)}
+.cell.line::after{content:"";position:absolute;top:0;bottom:0;right:-2px;width:3px;background:var(--lc);z-index:2;border-radius:2px}
+.cell:hover:not(.out){background-color:#f4f7fd}
+.head{position:relative;z-index:3;display:grid;grid-template-columns:repeat(7,1fr);height:24px;pointer-events:none}
+.dh{display:flex;align-items:center;gap:4px;padding:0 4px 0 8px;min-width:0;border-top:3px solid var(--ph,transparent)}
+.num{font-size:11.5px;font-weight:600;color:var(--muted);flex:none;line-height:16px}
+.num .mo{font-weight:800;color:var(--navy);margin-right:3px;text-transform:uppercase;font-size:10.5px;letter-spacing:.04em}
+.dh.is-today .num{color:#fff;background:var(--navy);border-radius:5px;padding:0 5px}
+.dh.is-today .num .mo{color:var(--lime)}
 .flags{display:flex;gap:3px;min-width:0;margin-left:auto}
-.flag{pointer-events:auto;cursor:pointer;font-size:10px;font-weight:600;line-height:15px;padding:0 5px;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;border:0}
-.flag.minor{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-strong)}
-.flag.major{background:var(--ink);color:var(--panel)}
-.flag.freeze{background:var(--freeze);color:#fff}
-.flag.mock{background:transparent;color:var(--mock);box-shadow:inset 0 0 0 1px var(--mock)}
-.bars{position:relative;display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:var(--rh,20px);row-gap:2px;padding-bottom:6px;pointer-events:none}
-.bar{pointer-events:auto;margin:0 4px;border-radius:4px;background:var(--c);color:var(--bar-ink);font-size:var(--fs,11.5px);font-weight:500;line-height:var(--rh,20px);padding:0 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;border:0;text-align:left;transition:opacity .12s,filter .12s}
-.bar.est{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.22) 0 5px,transparent 5px 10px)}
-.bar.cl{margin-left:0;border-top-left-radius:0;border-bottom-left-radius:0}
+.flag{pointer-events:auto;cursor:pointer;display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;line-height:16px;padding:0 6px 0 4px;border-radius:4px;white-space:nowrap;overflow:hidden;min-width:0;border:0;background:var(--fc);color:#fff}
+.flag span{overflow:hidden;text-overflow:ellipsis}
+.flag svg{font-size:11px}
+.flag.ring{background:#fff;color:var(--fc);box-shadow:inset 0 0 0 1.3px var(--fc)}
+.flag.mock{background:color-mix(in srgb,var(--mock) 13%,#fff);color:color-mix(in srgb,var(--mock) 80%,#000);padding:0 5px 0 4px}
+.bars{position:relative;z-index:3;display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:var(--rh,20px);row-gap:2px;padding:1px 0 6px;pointer-events:none}
+.bar{pointer-events:auto;display:flex;align-items:center;gap:5px;margin:0 4px;border-radius:5px;border:0;
+  background:color-mix(in srgb,var(--c) 14%,#fff);color:color-mix(in srgb,var(--c) 72%,#000);
+  box-shadow:inset 3px 0 0 var(--c);font-size:var(--fs,11.5px);font-weight:600;padding:0 7px 0 9px;white-space:nowrap;overflow:hidden;cursor:pointer;text-align:left;transition:background .12s,color .12s,opacity .12s}
+.bar .t{overflow:hidden;text-overflow:ellipsis;min-width:0}
+.bar svg{font-size:calc(var(--fs,11.5px) + 1px);color:var(--c)}
+.bar.est{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 11%,#fff) 0 6px,#fff 6px 11px);box-shadow:inset 0 0 0 1.3px color-mix(in srgb,var(--c) 55%,#fff)}
+.bar.est:not(.cl){box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.3px color-mix(in srgb,var(--c) 55%,#fff)}
+.bar.cl{margin-left:0;border-top-left-radius:0;border-bottom-left-radius:0;box-shadow:none;padding-left:7px}
+.bar.est.cl{box-shadow:inset 0 0 0 1.3px color-mix(in srgb,var(--c) 55%,#fff)}
 .bar.cr{margin-right:0;border-top-right-radius:0;border-bottom-right-radius:0}
-.bar.must::after{content:"MUST";font-size:9px;font-weight:700;letter-spacing:.05em;margin-left:6px;padding:0 4px;border-radius:3px;background:rgba(0,0,0,.22)}
-.bar:focus-visible,.flag:focus-visible,.chip:focus-visible{outline:2px solid var(--today);outline-offset:1px}
-.cal.dim .bar:not(.hl){opacity:.28}
-.bar.hl{filter:brightness(1.08)}
+.bar .must{margin-left:auto;flex:none;font-size:8.5px;font-weight:800;letter-spacing:.06em;color:#fff;background:var(--red);border-radius:3px;padding:0 4px;line-height:13px}
+.bar .end{margin-left:auto;flex:none;font-size:9.5px;opacity:.75;font-weight:700}
+.bar:hover,.bar.hl{background:var(--c);color:#fff}
+.bar:hover svg,.bar.hl svg{color:#fff}
+.bar:focus-visible,.flag:focus-visible,.chip:focus-visible,.node:focus-visible{outline:2px solid var(--sw);outline-offset:1px}
+.cal.dim .bar:not(.hl){opacity:.3}
 
-.section-name{font-size:12px;font-weight:600;color:var(--muted);margin:18px 2px 6px;letter-spacing:.02em}
+/* ---------- after freeze ---------- */
+.after{display:grid;grid-template-columns:1fr 250px;gap:14px;margin-top:22px;align-items:start}
+.sname{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--navy);margin:0 2px 7px;letter-spacing:.02em}
+.sname i{width:10px;height:10px;border-radius:2px;background:var(--c)}
+.art{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;margin-top:25px}
+.art img{width:100%;height:auto;border-radius:8px;display:block}
+.art p{margin:8px 0 0;font-size:11.5px;color:var(--muted)}
+.art p b{color:var(--navy)}
 
-/* drawer */
-.drawer{position:fixed;top:12px;right:12px;bottom:12px;width:340px;max-width:calc(100vw - 24px);background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:16px 18px;overflow:auto;transform:translateX(calc(100% + 24px));transition:transform .2s ease;z-index:10}
+/* ---------- drawer ---------- */
+.drawer{position:fixed;top:12px;right:12px;bottom:12px;width:350px;max-width:calc(100vw - 24px);background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(21,33,63,.22);overflow:auto;transform:translateX(calc(100% + 24px));transition:transform .22s ease;z-index:10}
 .drawer.open{transform:none}
-.drawer .x{position:absolute;top:10px;right:10px;border:0;background:none;font-size:18px;line-height:1;color:var(--muted);cursor:pointer;padding:4px 6px;border-radius:4px}
-.drawer .x:hover{background:var(--bg)}
-.d-lane{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
-.d-lane i{width:9px;height:9px;border-radius:2px;background:var(--c)}
-.drawer h2{font-size:16px;margin:6px 28px 4px 0;line-height:1.3}
-.d-when{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.d-top{padding:16px 18px 12px;background:color-mix(in srgb,var(--c,var(--navy)) 12%,#fff);border-bottom:1px solid var(--line)}
+.d-in{padding:12px 18px 18px}
+.drawer .x{position:absolute;top:10px;right:10px;border:0;background:rgba(255,255,255,.7);font-size:18px;line-height:1;color:var(--muted);cursor:pointer;padding:4px 7px;border-radius:6px}
+.d-lane{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:color-mix(in srgb,var(--c,var(--navy)) 80%,#000)}
+.d-lane svg{font-size:15px}
+.drawer h2{font-size:17px;margin:6px 30px 4px 0;line-height:1.25;color:var(--ink)}
+.d-when{font-size:12.5px;color:var(--muted)}
 .drawer ul{margin:0 0 12px;padding-left:18px}
-.drawer li{margin:3px 0}
-.d-tag{display:inline-block;font-size:11px;font-weight:600;border-radius:4px;padding:2px 6px;margin:0 4px 8px 0}
-.d-tag.est{background:color-mix(in srgb,var(--bopep) 16%,transparent);color:var(--ink)}
-.d-tag.must{background:color-mix(in srgb,var(--freeze) 16%,transparent);color:var(--ink)}
-.d-row{display:flex;gap:8px;align-items:flex-start;padding:7px 8px;border-radius:6px;cursor:pointer;border:0;background:none;width:100%;text-align:left}
-.d-row:hover{background:var(--bg)}
-.d-row i{flex:none;width:9px;height:9px;border-radius:2px;background:var(--c);margin-top:4px}
+.drawer li{margin:4px 0}
+.d-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;border-radius:5px;padding:2px 7px;margin:8px 4px 0 0}
+.d-tag.est{border:1.3px dashed var(--muted);color:var(--muted)}
+.d-tag.must{background:var(--red);color:#fff}
+.d-row{display:flex;gap:9px;align-items:flex-start;padding:7px 8px;border-radius:8px;cursor:pointer;border:0;background:none;width:100%;text-align:left}
+.d-row:hover{background:var(--paper)}
+.d-row .ic{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font-size:12px}
 .d-row small{display:block;color:var(--muted)}
-.d-sec{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}
+.d-sec{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:12px 0 4px}
 
+@media (max-width:1100px){
+  .top{grid-template-columns:auto 1fr}
+  .road{grid-column:1/-1;margin:4px 30px 0}
+  .callout .parts{display:none}
+}
 @media (max-width:720px){
   .app{padding:10px 8px 24px}
-  .dh{padding:0 3px}
-  .flag{font-size:9px;padding:0 3px}
-  .bar{margin:0 2px;padding:0 4px}
-  .legend .hint{display:none}
+  .brand .sub{white-space:normal}
+  .road{margin:4px 22px 0}
+  .seg{font-size:0}
+  .node{width:40px}.node .lbl{display:none}
+  .node .dot,.node.big .dot{width:20px;height:20px;font-size:11px;margin-top:12px}
+  .node .dd b{display:none}.node:not(.big) .dd{display:none}
+  .nowmark::after{display:none}
+  .callout{flex-wrap:wrap}
+  .dh{padding:0 2px}
+  .flag span{display:none}
+  .flag{padding:0 3px}
+  .bar{margin:0 2px;padding:0 3px 0 5px}
+  .bar svg,.bar .end{display:none}
+  .key{display:none}
+  .after{grid-template-columns:1fr}
+  .art{max-width:260px;margin:0 auto}
 }
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top">
-    <div>
-      <h1>Releaf final sprint</h1>
-      <div class="sub">21 Sep – 16 Nov 2026 · wiki freeze Wed 21 Oct · video freeze Wed 28 Oct · finals in Paris Mon 16 Nov</div>
+  <header class="top">
+    <img class="logo" src="img/logo.png" alt="Releaf, GEMs Taiwan 2026 team logo">
+    <div class="brand">
+      <h1>Road to <span>Paris</span></h1>
+      <div class="sub">Releaf · GEMs Taiwan · iGEM 2026 · 21 Sep – 16 Nov</div>
     </div>
-    <div class="count" id="count"></div>
-  </div>
+    <div class="road" id="road"></div>
+  </header>
+
+  <div class="callout" id="callout"></div>
   <div class="legend" id="legend"></div>
   <div class="cal" id="sprint"></div>
-  <div class="section-name">After the wiki freeze</div>
-  <div class="cal" id="after"></div>
+
+  <div class="after">
+    <div>
+      <div class="sname" style="--c:var(--ph-video)"><i></i>After the wiki freeze</div>
+      <div class="cal" id="afterCal"></div>
+    </div>
+    <figure class="art" style="margin-left:0;margin-right:0">
+      <img src="img/mascot-hydro.png" alt="Hand-drawn Releaf mascot: a smiling seed with a sprout, sitting in a bubble of flowing protectant">
+      <p><b>Mascot sketch by Abigail</b><br>The hydroponic Releaf seed, wrapped in flowing protectant</p>
+    </figure>
+  </div>
 </div>
 <aside class="drawer" id="drawer" aria-live="polite"><button class="x" id="dx" aria-label="Close">×</button><div id="dbody"></div></aside>
 
 <script>
+/* ---------- icons ---------- */
+const IC = {
+  opto:  '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.8 10.6c.5.5.8 1.2.8 2.4h6c0-1.2.3-1.9.8-2.4A6 6 0 0 0 12 3z"/>',
+  bio:   '<path d="M9 3h6M10 3v6l-5.6 9.6A1.6 1.6 0 0 0 5.8 21h12.4a1.6 1.6 0 0 0 1.4-2.4L14 9V3"/><path d="M7.2 15h9.6"/>',
+  sw:    '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 10h4v4h-4zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
+  plant: '<path d="M12 21v-9"/><path d="M12 13C12 8 9 5.5 4 5.5c0 4.5 3 7.5 8 7.5z"/><path d="M12 10.5c0-4 2.6-6.5 8-6.5 0 4-3 6.5-8 6.5z"/>',
+  bopep: '<path d="M12 2.5l2.7 5.8 6.3.8-4.6 4.3 1.2 6.3L12 16.6l-5.6 3.1 1.2-6.3L3 9.1l6.3-.8z"/>',
+  wiki:  '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+  video: '<rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10.5l5-3v9l-5-3z"/>',
+  mock:  '<rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M9 21h6"/>',
+  trip:  '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>',
+  lock:  '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>',
+  trophy:'<path d="M8 21h8M12 16.5V21M7 3.5h10V9a5 5 0 0 1-10 0z"/><path d="M17 5h3v1.5A3.5 3.5 0 0 1 16.8 10M7 5H4v1.5A3.5 3.5 0 0 0 7.2 10"/>',
+  blot:  '<rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7.5 9h3M13.5 9h3M7.5 13h3M13.5 13h3M7.5 17h3"/>',
+  flag:  '<path d="M5 21V4M5 4h12l-2.5 4.5L17 13H5"/>',
+};
+const svg = k => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
+
+/* ---------- dates ---------- */
 const Y = 2026;
 const D = s => { const [m, d] = s.split('-').map(Number); return new Date(Y, m - 1, d); };
 const add = (d, n) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
@@ -147,9 +232,20 @@ const same = (a, b) => days(a, b) === 0;
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const WD = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const fmt = d => `${WD[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;
+const short = d => `${MON[d.getMonth()]} ${d.getDate()}`;
 
-const START = D('09-21'), FREEZE = D('10-21'), END = D('11-16');
+const START = D('09-21'), INTERNAL = D('10-01'), FREEZE = D('10-21'), VFREEZE = D('10-28'), END = D('11-16');
+const today = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); })();
 
+const PHASES = [
+  { id: 'draft',    name: 'Draft everything', s: START,         e: INTERNAL, c: 'var(--ph-draft)' },
+  { id: 'refine',   name: 'Refine + add data', s: add(INTERNAL,1), e: FREEZE, c: 'var(--ph-refine)' },
+  { id: 'video',    name: 'Video',            s: add(FREEZE,1),  e: VFREEZE, c: 'var(--ph-video)' },
+  { id: 'rehearse', name: 'Rehearse',         s: add(VFREEZE,1), e: END,     c: 'var(--ph-rehearse)' },
+];
+const phaseOf = d => PHASES.find(p => d >= p.s && d <= p.e);
+
+/* ---------- plan ---------- */
 const LANES = [
   { id: 'opto',  name: 'Optogenetics' },
   { id: 'bio',   name: 'Bioreactor' },
@@ -164,9 +260,9 @@ const LANES = [
 const laneOf = id => LANES.find(l => l.id === id);
 
 const TASKS = [
-  { id: 'o1', lane: 'opto', title: 'LPA-ACCD assay, repeat', s: '09-23', e: '09-27',
+  { id: 'o1', lane: 'opto', title: 'LPA-ACCD assay, repeat', s: '09-23', e: '09-27', end: 'WB',
     notes: ['Set up Wed 23 Sep', 'Western blot results Sun 27 Sep'] },
-  { id: 'b1', lane: 'bio', title: 'ACCD constitutive run 2 · students solo', s: '09-23', e: '09-27',
+  { id: 'b1', lane: 'bio', title: 'ACCD constitutive run 2 · students solo', s: '09-23', e: '09-27', end: 'WB',
     who: 'Joshua, Anton, Noah',
     notes: ['Students set up and run it on their own from Wed 23 Sep', 'Western blot results Sun 27 Sep', 'The digital twin trials run on this data'] },
   { id: 'b2', lane: 'bio', title: 'Automated run: pinch + luer valves', s: '10-01', e: '10-03',
@@ -174,11 +270,11 @@ const TASKS = [
   { id: 's1', lane: 'sw', title: 'AIoT sensors: install, run, collect', s: '09-21', e: '09-27',
     notes: ['Install and run the sensors', 'Every data collection finished by Sun 27 Sep'] },
   { id: 's2', lane: 'sw', title: 'AIoT sensor write-up', s: '09-28', e: '10-01',
-    notes: ['Sensor write-up finished by Thu 1 Oct'] },
+    notes: ['Sensor write-up finished by Thu 1 Oct, in time for the internal wiki freeze'] },
   { id: 's3', lane: 'sw', title: 'Digital twin trials on run-2 data', s: '09-27', e: '09-30', dep: 'b1',
     notes: ['UI is about 80% built; it now needs real experiments', 'Trials use trained data from bioreactor run 2', 'Run Sun 27 – Wed 30 Sep'] },
   { id: 's4', lane: 'sw', title: 'Digital twin write-up', s: '10-01', e: '10-01',
-    notes: ['Writing finished by Thu 1 Oct'] },
+    notes: ['Writing finished by Thu 1 Oct, in time for the internal wiki freeze'] },
   { id: 'p1', lane: 'plant', title: 'ACCD + LEA plant assays', s: '09-21', e: '10-21', must: true,
     notes: ['ACCD on agar and ACCD on hydroponics started Sun 20 Sep (agar run 2; run 1 data is unusable)',
             'Clear, usable ACCD, LEA and BoPep4 plant data by Wed 21 Oct. Not optional.',
@@ -186,21 +282,22 @@ const TASKS = [
   { id: 'bp1', lane: 'bopep', title: 'Level-1 cloning: close out', s: '09-21', e: '09-30', est: true,
     notes: ['Level 1 is close to working', 'End date is assumed; set the real one'] },
   { id: 'bp2', lane: 'bopep', title: 'Protein design write-up (dry lab)', s: '09-21', e: '10-01',
-    notes: ['The heaviest dry-lab piece of the project', 'Goes into the wiki full draft on Thu 1 Oct'] },
+    notes: ['The heaviest dry-lab piece of the project', 'Due in the wiki by the internal freeze, Thu 1 Oct'] },
   { id: 'bp3', lane: 'bopep', title: 'BoPep4 on plants', s: '10-01', e: '10-21', est: true, must: true,
-    notes: ['New protectant from academic work, moved toward farmer use', 'Start assumed at 1 Oct, once cloning closes', 'Plant data due Wed 21 Oct'] },
-  { id: 'w1', lane: 'wiki', title: 'Full draft: results, registry, modeling, measurement, hardware', s: '09-21', e: '10-01',
-    notes: ['Every existing result written, fixed and pushed by Thu 1 Oct', 'Results, registry, modeling, measurement, hardware, all up to date'] },
+    notes: ['A new protectant from academic work, moved toward farmer use', 'Start assumed at 1 Oct, once cloning closes', 'Plant data due Wed 21 Oct'] },
+  { id: 'w1', lane: 'wiki', title: 'Full wiki draft · every owner delivers', s: '09-21', e: '10-01', end: '10/1',
+    notes: ['Internal freeze Thu 1 Oct: every section owner hands in a full, fixed draft',
+            'Results, registry, modeling, measurement, hardware, all up to date',
+            'Every existing result written, fixed and pushed'] },
   { id: 'w2', lane: 'wiki', title: 'Add new results, fix, polish', s: '10-02', e: '10-21',
-    notes: ['Add results from later experiments as they land', 'Freeze Wed 21 Oct'] },
-  { id: 'v1', lane: 'video', title: 'Presentation video v1 (existing data)', s: '10-02', e: '10-10', est: true,
-    notes: ['First version delivered Sat 10 Oct, built from existing data', 'Start assumed right after the wiki draft'] },
+    notes: ['Only new experiment results get added after 1 Oct', 'Freeze Wed 21 Oct'] },
+  { id: 'v1', lane: 'video', title: 'Presentation video v1 (existing data)', s: '10-02', e: '10-10', est: true, end: 'v1',
+    notes: ['First version delivered Sat 10 Oct, built from existing data', 'Start assumed right after the internal wiki freeze'] },
   { id: 'v2', lane: 'video', title: 'Video revisions', s: '10-11', e: '10-28',
     notes: ['Freeze Wed 28 Oct'] },
   { id: 't1', lane: 'trip', title: 'Paris: finals week', s: '11-10', e: '11-16',
     notes: ['Fly to Paris Tue 10 Nov', 'Finalist presentation Mon 16 Nov'] },
 ];
-// judging mocks: every Sat and Sun from 3 Oct, 1–2 h
 for (let d = D('10-03'); d <= END; d = add(d, 1)) {
   if (d.getDay() === 6 || d.getDay() === 0) {
     const k = `${d.getMonth() + 1}-${d.getDate()}`;
@@ -210,46 +307,68 @@ for (let d = D('10-03'); d <= END; d = add(d, 1)) {
 TASKS.forEach(t => { t.S = D(t.s); t.E = D(t.e); });
 
 const MILES = [
-  { d: '09-27', label: 'WB ×2', lvl: 'minor', title: 'Western blot results', note: 'Optogenetics LPA-ACCD and bioreactor run 2' },
-  { d: '10-01', label: 'Wiki draft', lvl: 'major', title: 'Wiki full draft', note: 'All existing data written, fixed and pushed' },
-  { d: '10-10', label: 'Video v1', lvl: 'major', title: 'Presentation video v1', note: 'First version from existing data' },
-  { d: '10-21', label: 'Wiki freeze', lvl: 'freeze', title: 'Wiki freeze', note: 'Plant data for ACCD, LEA and BoPep4 must be in' },
-  { d: '10-28', label: 'Video freeze', lvl: 'freeze', title: 'Presentation video freeze', note: '' },
-  { d: '11-10', label: 'Fly to Paris', lvl: 'major', title: 'Flight to Paris', note: '' },
-  { d: '11-16', label: 'Finals', lvl: 'freeze', title: 'Finalist presentation', note: 'Paris' },
+  { d: '09-27', flag: '2× WB',        road: null,              icon: 'blot',   c: 'var(--muted)', ring: true, title: 'Western blot results', note: 'Optogenetics LPA-ACCD and bioreactor run 2' },
+  { d: '10-01', flag: 'Internal freeze', road: 'Internal freeze', icon: 'lock', c: 'var(--navy)', big: true, line: true, title: 'Internal wiki freeze', note: 'Every section owner delivers a full, fixed wiki draft with all existing data' },
+  { d: '10-10', flag: 'Video v1',     road: 'Video v1',        icon: 'video',  c: 'var(--video)', ring: true, title: 'Presentation video v1', note: 'First version, built from existing data' },
+  { d: '10-21', flag: 'Wiki freeze',  road: 'Wiki freeze',     icon: 'lock',   c: 'var(--red)', big: true, line: true, title: 'Wiki freeze', note: 'Plant data for ACCD, LEA and BoPep4 must be in' },
+  { d: '10-28', flag: 'Video freeze', road: 'Video freeze',    icon: 'lock',   c: 'var(--video)', line: true, title: 'Presentation video freeze', note: '' },
+  { d: '11-10', flag: 'Fly to Paris', road: 'Paris',           icon: 'trip',   c: 'var(--navy)', ring: true, title: 'Flight to Paris', note: '' },
+  { d: '11-16', flag: 'Finals',       road: 'Finals',          icon: 'trophy', c: 'var(--mock)', big: true, title: 'Finalist presentation', note: 'Paris' },
 ];
 MILES.forEach(m => m.D = D(m.d));
 
 const hidden = new Set();
-const today = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); })();
 
-/* ---------- legend + countdown ---------- */
+/* ---------- road strip ---------- */
+(function road() {
+  const el = document.getElementById('road'), span = days(START, END);
+  const pos = d => (days(START, d) / span * 100);
+  // refine label sits right of the Video v1 node; rehearse label sits left of Paris
+  const align = { refine: 'justify-content:flex-end;padding-right:22px', rehearse: 'justify-content:flex-start;padding-left:18px' };
+  let h = '<div class="track">' + PHASES.map(p => `<div class="seg" style="background:${p.c};width:${(days(p.s, p.e) + 1) / (span + 1) * 100}%;${align[p.id] || ''}">${p.name}</div>`).join('') + '</div>';
+  if (today >= START && today <= END) h += `<div class="nowmark" style="left:calc(${pos(today)}% - 1px)"></div>`;
+  MILES.filter(m => m.road).forEach(m => {
+    const n = days(today, m.D);
+    h += `<button class="node${m.big ? ' big' : ''}" data-mile="${m.d}" style="left:${pos(m.D)}%;--nc:${m.c}">
+      <span class="lbl">${m.road}</span><span class="dot${m.ring ? ' ring' : ''}">${svg(m.icon)}</span>
+      <span class="dd">${short(m.D)}${n > 0 ? ` · <b>${n}d</b>` : ''}</span></button>`;
+  });
+  el.innerHTML = h;
+})();
+
+/* ---------- internal freeze callout ---------- */
+(function callout() {
+  const n = days(today, INTERNAL);
+  document.getElementById('callout').innerHTML = `
+    <span class="badge">${svg('lock')} Thu 1 Oct · Internal wiki freeze</span>
+    <span class="msg">Everyone hands in their <b>full, fixed wiki draft</b> with every existing result. After this, only new data gets added.</span>
+    <span class="parts"><span>Results</span><span>Registry</span><span>Modeling</span><span>Measurement</span><span>Hardware</span></span>
+    <span class="left">${n > 0 ? n + ' days left' : n === 0 ? 'Today' : 'Passed'}</span>`;
+})();
+
+/* ---------- legend ---------- */
 const legend = document.getElementById('legend');
 LANES.forEach(l => {
   const b = document.createElement('button');
-  b.className = 'chip'; b.style.setProperty('--c', `var(--${l.id})`);
+  b.className = 'chip' + (l.id === 'bopep' ? ' star' : ''); b.style.setProperty('--c', `var(--${l.id})`);
   b.setAttribute('aria-pressed', 'true'); b.dataset.lane = l.id;
-  b.innerHTML = `<i></i>${l.name}`;
+  b.innerHTML = `<span class="ic">${svg(l.id)}</span>${l.name}`;
   b.title = 'Click to hide or show · double-click to show only this';
   b.onclick = () => { hidden.has(l.id) ? hidden.delete(l.id) : hidden.add(l.id); render(); };
   b.ondblclick = () => { hidden.clear(); LANES.forEach(x => x.id !== l.id && hidden.add(x.id)); render(); };
   legend.appendChild(b);
 });
-legend.insertAdjacentHTML('beforeend', `<button class="linkbtn" id="all">Show all</button><span class="hint"><span class="est-key"></span>striped = date assumed · click any bar or day for detail</span>`);
+legend.insertAdjacentHTML('beforeend', `<button class="linkbtn" id="all">Show all</button>
+  <span class="key"><i class="k-est"></i>dashed = date assumed</span>
+  <span class="key"><i class="k-ph"></i>top stripe = phase</span>`);
 document.getElementById('all').onclick = () => { hidden.clear(); render(); };
 
-document.getElementById('count').innerHTML = MILES.filter(m => m.lvl !== 'minor' && m.D >= today).map(m => {
-  const n = days(today, m.D);
-  return `<span class="${m.lvl === 'freeze' ? 'hot' : ''}">${m.title.replace('Presentation video', 'Video').replace('Finalist presentation', 'Finals')} <b>${n === 0 ? 'today' : n + ' d'}</b></span>`;
-}).join('');
-
 /* ---------- calendar ---------- */
-const sprintEl = document.getElementById('sprint'), afterEl = document.getElementById('after');
+const sprintEl = document.getElementById('sprint'), afterEl = document.getElementById('afterCal');
 const cal = [sprintEl, afterEl];
-
 function weekStarts(from, to) { const a = []; for (let d = from; d <= to; d = add(d, 7)) a.push(d); return a; }
-const SPRINT_WEEKS = weekStarts(START, D('10-19'));   // 5 weeks, ends Sun 25 Oct
-const AFTER_WEEKS  = weekStarts(D('10-26'), END);     // 26 Oct – 16 Nov
+const SPRINT_WEEKS = weekStarts(START, D('10-19'));
+const AFTER_WEEKS  = weekStarts(D('10-26'), END);
 
 function buildWeek(ws) {
   const we = add(ws, 6);
@@ -257,7 +376,6 @@ function buildWeek(ws) {
     const s = t.S < ws ? ws : t.S, e = t.E > we ? we : t.E;
     return { t, c: days(ws, s), n: days(s, e) + 1, cl: t.S < ws, cr: t.E > we };
   });
-  // pack lane by lane so each theme keeps its vertical order
   let base = 0;
   LANES.forEach(l => {
     const rows = [];
@@ -270,44 +388,46 @@ function buildWeek(ws) {
   });
   return { ws, segs, rows: base };
 }
-
-function inRange(d) { return d >= START && d <= END; }
+const inRange = d => d >= START && d <= END;
 
 function renderWeek(w, isSprint) {
   const el = document.createElement('div'); el.className = 'week';
   let cells = '', head = '';
   for (let i = 0; i < 7; i++) {
     const d = add(w.ws, i), out = !inRange(d);
-    const cls = ['cell'];
+    const cls = ['cell']; let style = '';
+    const ml = MILES.find(m => m.line && same(m.D, d));
     if (out) cls.push('out');
     else {
       if (d.getDay() === 0 || d.getDay() === 6) cls.push('we');
       if (isSprint && d > FREEZE) cls.push('post');
-      if (same(d, FREEZE)) cls.push('freeze');
       if (same(d, today)) cls.push('today');
+      if (ml) { cls.push('line'); style = `--lc:${ml.c}`; }
     }
-    cells += `<div class="${cls.join(' ')}" data-day="${out ? '' : +d}" title="${out ? '' : fmt(d)}"></div>`;
+    cells += `<div class="${cls.join(' ')}" style="${style}" data-day="${out ? '' : +d}"></div>`;
     if (out) { head += '<div class="dh"></div>'; continue; }
     const first = i === 0 || d.getDate() === 1;
-    const flags = MILES.filter(m => same(m.D, d)).map(m => `<button class="flag ${m.lvl}" data-mile="${m.d}" title="${m.title}">${m.label}</button>`)
-      .concat(hidden.has('mock') ? [] : TASKS.filter(t => t.badge && same(t.S, d)).map(t => `<button class="flag mock" data-task="${t.id}" title="Judging mock, 1–2 h">Mock</button>`));
-    head += `<div class="dh${same(d, today) ? ' is-today' : ''}"><span class="num">${first ? `<span class="mo">${MON[d.getMonth()]}</span>` : ''}${d.getDate()}</span><span class="flags">${flags.join('')}</span></div>`;
+    const flags = MILES.filter(m => same(m.D, d)).map(m =>
+        `<button class="flag${m.ring ? ' ring' : ''}" style="--fc:${m.c}" data-mile="${m.d}" title="${m.title}">${svg(m.icon)}<span>${m.flag}</span></button>`)
+      .concat(hidden.has('mock') ? [] : TASKS.filter(t => t.badge && same(t.S, d)).map(t =>
+        `<button class="flag mock" data-task="${t.id}" title="Judging mock, 1–2 h">${svg('mock')}<span>Mock</span></button>`));
+    const ph = phaseOf(d);
+    head += `<div class="dh${same(d, today) ? ' is-today' : ''}" style="--ph:${ph ? ph.c : 'transparent'}"><span class="num">${first ? `<span class="mo">${MON[d.getMonth()]}</span>` : ''}${d.getDate()}</span><span class="flags">${flags.join('')}</span></div>`;
   }
   const bars = w.segs.map(g => {
     const t = g.t, cls = ['bar'];
-    if (t.est) cls.push('est'); if (t.must && !g.cr) cls.push('must');
-    if (g.cl) cls.push('cl'); if (g.cr) cls.push('cr');
-    return `<button class="${cls.join(' ')}" data-task="${t.id}" style="--c:var(--${t.lane});grid-column:${g.c + 1}/span ${g.n};grid-row:${g.row + 1}" title="${t.title} · ${fmt(t.S)}${t.s !== t.e ? ' → ' + fmt(t.E) : ''}">${t.title}</button>`;
+    if (t.est) cls.push('est'); if (g.cl) cls.push('cl'); if (g.cr) cls.push('cr');
+    const tail = !g.cr ? (t.must ? '<span class="must">MUST</span>' : t.end ? `<span class="end">${t.end}</span>` : '') : '';
+    return `<button class="${cls.join(' ')}" data-task="${t.id}" style="--c:var(--${t.lane});grid-column:${g.c + 1}/span ${g.n};grid-row:${g.row + 1}" title="${t.title} · ${fmt(t.S)}${t.s !== t.e ? ' → ' + fmt(t.E) : ''}">${g.cl ? '' : svg(t.lane)}<span class="t">${t.title}</span>${tail}</button>`;
   }).join('');
   el.innerHTML = `<div class="cells">${cells}</div><div class="head">${head}</div><div class="bars">${bars}</div>`;
+  el._rows = w.rows;
   return el;
 }
 
 function renderCal(host, starts, isSprint) {
   host.innerHTML = '<div class="dow">' + ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(x => `<div>${x}</div>`).join('') + '</div>';
-  const weeks = starts.map(buildWeek);
-  weeks.forEach(w => { const el = renderWeek(w, isSprint); el._rows = w.rows; host.appendChild(el); });
-  return weeks;
+  starts.map(buildWeek).forEach(w => host.appendChild(renderWeek(w, isSprint)));
 }
 
 function render() {
@@ -319,55 +439,57 @@ function render() {
 
 // Fit the five sprint weeks (21 Sep – 25 Oct) into one screen.
 function layout() {
-  const HEAD = 22, PAD = 6, GAP = 2;
+  const HEAD = 24, PAD = 7, GAP = 2;
   const weeks = [...sprintEl.querySelectorAll('.week')];
   const rows = weeks.reduce((a, w) => a + Math.max(w._rows, 1), 0);
   const phone = innerWidth < 720;
   const top = sprintEl.getBoundingClientRect().top + scrollY + sprintEl.querySelector('.dow').offsetHeight;
-  const avail = innerHeight - top - 14;
+  const avail = innerHeight - top - 12;
   let rh = phone ? 18 : Math.floor((avail - weeks.length * (HEAD + PAD)) / rows) - GAP;
-  rh = Math.max(15, Math.min(24, rh));
+  rh = Math.max(14, Math.min(24, rh));
   const fs = rh >= 19 ? '11.5px' : rh >= 16 ? '10.5px' : '10px';
-  [sprintEl, afterEl].forEach(c => { c.style.setProperty('--rh', rh + 'px'); c.style.setProperty('--fs', fs); });
+  cal.forEach(c => { c.style.setProperty('--rh', rh + 'px'); c.style.setProperty('--fs', fs); });
   const used = weeks.reduce((a, w) => a + HEAD + PAD + w._rows * (rh + GAP), 0);
   const extra = phone ? 8 : Math.max(0, (avail - used) / weeks.length);
   weeks.forEach(w => w.style.minHeight = (HEAD + PAD + w._rows * (rh + GAP) + extra) + 'px');
-  afterEl.querySelectorAll('.week').forEach(w => w.style.minHeight = (HEAD + PAD + Math.max(w._rows, 1) * (rh + GAP) + 14) + 'px');
+  afterEl.querySelectorAll('.week').forEach(w => w.style.minHeight = (HEAD + PAD + Math.max(w._rows, 1) * (rh + GAP) + 16) + 'px');
 }
 addEventListener('resize', layout);
 
-/* ---------- interaction ---------- */
+/* ---------- drawer ---------- */
 const drawer = document.getElementById('drawer'), dbody = document.getElementById('dbody');
 const close = () => drawer.classList.remove('open');
 document.getElementById('dx').onclick = close;
 addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-
-function span(t) { return t.s === t.e ? fmt(t.S) : `${fmt(t.S)} → ${fmt(t.E)} · ${days(t.S, t.E) + 1} days`; }
+const spanTxt = t => t.s === t.e ? fmt(t.S) : `${fmt(t.S)} → ${fmt(t.E)} · ${days(t.S, t.E) + 1} days`;
+const row = t => `<button class="d-row" data-task="${t.id}" style="--c:var(--${t.lane})"><span class="ic">${svg(t.lane)}</span><span>${t.title}<small>${laneOf(t.lane).name} · ${spanTxt(t)}</small></span></button>`;
 
 function showTask(id) {
   const t = TASKS.find(x => x.id === id), l = laneOf(t.lane);
   const dep = t.dep ? TASKS.find(x => x.id === t.dep) : null;
+  drawer.style.setProperty('--c', `var(--${t.lane})`);
   dbody.innerHTML = `
-    <div class="d-lane" style="--c:var(--${t.lane})"><i></i>${l.name}</div>
-    <h2>${t.title}</h2>
-    <div class="d-when">${span(t)}</div>
-    ${t.must ? '<span class="d-tag must">Must deliver</span>' : ''}${t.est ? '<span class="d-tag est">Dates partly assumed</span>' : ''}
-    ${t.who ? `<div class="d-sec">Who</div><div style="margin-bottom:10px">${t.who}</div>` : ''}
+    <div class="d-top"><div class="d-lane">${svg(t.lane)}${l.name}</div><h2>${t.title}</h2><div class="d-when">${spanTxt(t)}</div>
+    ${t.must ? '<span class="d-tag must">MUST deliver</span>' : ''}${t.est ? '<span class="d-tag est">Dates partly assumed</span>' : ''}</div>
+    <div class="d-in">
+    ${t.who ? `<div class="d-sec">Who</div><div>${t.who}</div>` : ''}
     <div class="d-sec">Notes</div><ul>${t.notes.map(n => `<li>${n}</li>`).join('')}</ul>
-    ${dep ? `<div class="d-sec">Depends on</div><button class="d-row" data-task="${dep.id}" style="--c:var(--${dep.lane})"><i></i><span>${dep.title}<small>${span(dep)}</small></span></button>` : ''}`;
+    ${dep ? `<div class="d-sec">Depends on</div>${row(dep)}` : ''}</div>`;
   drawer.classList.add('open');
 }
 
 function showDay(d) {
   const ms = MILES.filter(m => same(m.D, d));
   const ts = TASKS.filter(t => !hidden.has(t.lane) && t.S <= d && t.E >= d);
-  const left = days(d, FREEZE);
+  const ph = phaseOf(d), left = days(d, FREEZE), toInt = days(d, INTERNAL);
+  drawer.style.setProperty('--c', ph ? ph.c : 'var(--navy)');
+  const count = toInt > 0 ? `${toInt} days to the internal freeze · ${left} to wiki freeze` : left > 0 ? `${left} days to wiki freeze` : left === 0 ? 'Wiki freeze day' : 'After the wiki freeze';
   dbody.innerHTML = `
-    <div class="d-lane">${d > FREEZE ? 'After wiki freeze' : left === 0 ? 'Wiki freeze day' : left + ' days to wiki freeze'}</div>
-    <h2>${fmt(d)}</h2>
-    ${ms.length ? '<div class="d-sec">Deadlines</div>' + ms.map(m => `<div class="d-row" style="--c:var(--freeze);cursor:default"><i></i><span><b>${m.title}</b>${m.note ? `<small>${m.note}</small>` : ''}</span></div>`).join('') : ''}
+    <div class="d-top"><div class="d-lane">Phase · ${ph ? ph.name : ''}</div><h2>${fmt(d)}</h2><div class="d-when">${count}</div></div>
+    <div class="d-in">
+    ${ms.length ? '<div class="d-sec">Deadline</div>' + ms.map(m => `<div class="d-row" style="--c:${m.c};cursor:default"><span class="ic">${svg(m.icon)}</span><span><b>${m.title}</b>${m.note ? `<small>${m.note}</small>` : ''}</span></div>`).join('') : ''}
     <div class="d-sec">Running this day</div>
-    ${ts.length ? ts.map(t => `<button class="d-row" data-task="${t.id}" style="--c:var(--${t.lane})"><i></i><span>${t.title}<small>${laneOf(t.lane).name} · ${span(t)}</small></span></button>`).join('') : '<div class="d-row" style="cursor:default;color:var(--muted)">Nothing scheduled</div>'}`;
+    ${ts.length ? ts.map(row).join('') : '<div class="d-row" style="cursor:default;color:var(--muted)">Nothing scheduled</div>'}</div>`;
   drawer.classList.add('open');
 }
 
@@ -392,6 +514,7 @@ cal.forEach(c => {
 
 render();
 document.fonts && document.fonts.ready.then(layout);
+addEventListener('load', layout);
 </script>
 </body>
 </html>
