@@ -14,13 +14,13 @@
 :root{
   color-scheme:light;
   /* ground, from the team logo: deep navy + seedling lime on warm paper */
-  --paper:#f8f8f3; --panel:#ffffff; --ink:#15213f; --muted:#6a7185; --line:#e6e6de; --line-soft:#efefe9;
-  --navy:#1b2a5c; --lime:#8cc63f; --lime-soft:#eef6e0; --red:#d9362b;
+  --paper:#f5f6f8; --panel:#ffffff; --ink:#172033; --muted:#667085; --line:#e2e5eb; --line-soft:#eef0f4;
+  --navy:#1b2a5c; --lime:#8cc63f; --lime-soft:#f0f6e6; --red:#c62828; --gold:#b8860b;
   /* phases */
-  --ph-draft:#8cc63f; --ph-refine:#5b8def; --ph-video:#d4507f; --ph-rehearse:#d6a21e;
+  --ph-draft:#7ba05b; --ph-refine:#5e81ac; --ph-video:#a8738e; --ph-rehearse:#b89b5e;
   /* themes */
-  --opto:#7457d6; --bio:#0f8f86; --sw:#2f73d0; --plant:#4f9a2a; --bopep:#e0721a;
-  --wiki:#1b2a5c; --video:#d4507f; --mock:#c28f12; --trip:#d9362b;
+  --opto:#6554c0; --bio:#00857a; --sw:#2f6db5; --plant:#3f8a3a; --bopep:#c4611b;
+  --wiki:#3b4a63; --video:#a63d6b; --mock:#8c7318; --trip:#5b6474;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -50,15 +50,14 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 .nowmark{position:absolute;top:21px;width:2px;height:20px;background:var(--ink);border-radius:1px}
 .nowmark::after{content:"today";position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.06em}
 
-/* internal freeze callout */
-.callout{display:flex;align-items:center;gap:12px;background:var(--navy);color:#fff;border-radius:10px;padding:7px 12px;margin-bottom:8px;position:relative;overflow:hidden}
+/* delivery callouts */
+.callouts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.callout{display:flex;align-items:center;gap:11px;background:var(--navy);color:#fff;border-radius:10px;padding:7px 12px;min-width:0}
 .callout .badge{display:flex;align-items:center;gap:6px;background:var(--lime);color:var(--navy);font-weight:800;font-size:12px;border-radius:6px;padding:4px 9px;white-space:nowrap}
 .callout .badge svg{font-size:14px}
-.callout .msg{font-size:12.5px;line-height:1.3;min-width:0}
-.callout .msg b{color:var(--lime)}
-.callout .parts{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
-.callout .parts span{font-size:10.5px;font-weight:600;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:2px 8px;white-space:nowrap}
-.callout .left{font-size:11px;font-weight:700;background:rgba(255,255,255,.12);border-radius:6px;padding:4px 8px;white-space:nowrap}
+.callout .msg{font-size:12px;line-height:1.3;min-width:0;color:#dfe4f0}
+.callout .msg b{color:#fff}
+.callout .left{margin-left:auto;font-size:11px;font-weight:700;background:rgba(255,255,255,.12);border-radius:6px;padding:4px 8px;white-space:nowrap}
 
 /* legend */
 .legend{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:8px}
@@ -84,8 +83,8 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 .cells{position:absolute;inset:0;display:grid;grid-template-columns:repeat(7,1fr)}
 .cell{border-right:1px solid var(--line-soft);cursor:pointer;position:relative}
 .cell:last-child{border-right:0}
-.cell.we{background:#fbfaf4}
-.cell.post{background:#f1f1ec;background-image:repeating-linear-gradient(135deg,transparent 0 7px,rgba(21,33,63,.045) 7px 8px)}
+.cell.we{background:#fafbfc}
+.cell.post{background:#f0f1f4;background-image:repeating-linear-gradient(135deg,transparent 0 7px,rgba(21,33,63,.045) 7px 8px)}
 .cell.out{background:var(--paper);cursor:default}
 .cell.today{background:var(--lime-soft)}
 .cell.line::after{content:"";position:absolute;top:0;bottom:0;right:-2px;width:3px;background:var(--lc);z-index:2;border-radius:2px}
@@ -153,7 +152,7 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 @media (max-width:1100px){
   .top{grid-template-columns:auto 1fr}
   .road{grid-column:1/-1;margin:4px 30px 0}
-  .callout .parts{display:none}
+  .callouts{grid-template-columns:1fr}
 }
 @media (max-width:720px){
   .app{padding:10px 8px 24px}
@@ -187,7 +186,7 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
     <div class="road" id="road"></div>
   </header>
 
-  <div class="callout" id="callout"></div>
+  <div class="callouts" id="callouts"></div>
   <div class="legend" id="legend"></div>
   <div class="cal" id="sprint"></div>
 
@@ -281,8 +280,6 @@ const TASKS = [
             'BoPep4 plant work is tracked on its own line'] },
   { id: 'bp1', lane: 'bopep', title: 'Level-1 cloning: close out', s: '09-21', e: '09-30', est: true,
     notes: ['Level 1 is close to working', 'End date is assumed; set the real one'] },
-  { id: 'bp2', lane: 'bopep', title: 'Protein design write-up (dry lab)', s: '09-21', e: '10-01',
-    notes: ['The heaviest dry-lab piece of the project', 'Due in the wiki by the internal freeze, Thu 1 Oct'] },
   { id: 'bp3', lane: 'bopep', title: 'BoPep4 on plants', s: '10-01', e: '10-21', est: true, must: true,
     notes: ['A new protectant from academic work, moved toward farmer use', 'Start assumed at 1 Oct, once cloning closes', 'Plant data due Wed 21 Oct'] },
   { id: 'w1', lane: 'wiki', title: 'Full wiki draft · every owner delivers', s: '09-21', e: '10-01', end: '10/1',
@@ -291,8 +288,10 @@ const TASKS = [
             'Every existing result written, fixed and pushed'] },
   { id: 'w2', lane: 'wiki', title: 'Add new results, fix, polish', s: '10-02', e: '10-21',
     notes: ['Only new experiment results get added after 1 Oct', 'Freeze Wed 21 Oct'] },
-  { id: 'v1', lane: 'video', title: 'Presentation video v1 (existing data)', s: '10-02', e: '10-10', est: true, end: 'v1',
-    notes: ['First version delivered Sat 10 Oct, built from existing data', 'Start assumed right after the internal wiki freeze'] },
+  { id: 'v1', lane: 'video', title: 'Video v1: full first version, all key results', s: '10-02', e: '10-10', must: true,
+    notes: ['Delivered Sat 10 Oct as a complete first version, not a rough cut',
+            'Covers the whole story start to finish, with every key result on screen',
+            'Built from the data in the 1 Oct wiki draft', 'Start date 2 Oct is assumed'] },
   { id: 'v2', lane: 'video', title: 'Video revisions', s: '10-11', e: '10-28',
     notes: ['Freeze Wed 28 Oct'] },
   { id: 't1', lane: 'trip', title: 'Paris: finals week', s: '11-10', e: '11-16',
@@ -309,11 +308,11 @@ TASKS.forEach(t => { t.S = D(t.s); t.E = D(t.e); });
 const MILES = [
   { d: '09-27', flag: '2× WB',        road: null,              icon: 'blot',   c: 'var(--muted)', ring: true, title: 'Western blot results', note: 'Optogenetics LPA-ACCD and bioreactor run 2' },
   { d: '10-01', flag: 'Internal freeze', road: 'Internal freeze', icon: 'lock', c: 'var(--navy)', big: true, line: true, title: 'Internal wiki freeze', note: 'Every section owner delivers a full, fixed wiki draft with all existing data' },
-  { d: '10-10', flag: 'Video v1',     road: 'Video v1',        icon: 'video',  c: 'var(--video)', ring: true, title: 'Presentation video v1', note: 'First version, built from existing data' },
+  { d: '10-10', flag: 'Video v1 due', road: 'Video v1',        icon: 'video',  c: 'var(--navy)', big: true, line: true, title: 'Presentation video v1', note: 'Full first version with every key result' },
   { d: '10-21', flag: 'Wiki freeze',  road: 'Wiki freeze',     icon: 'lock',   c: 'var(--red)', big: true, line: true, title: 'Wiki freeze', note: 'Plant data for ACCD, LEA and BoPep4 must be in' },
-  { d: '10-28', flag: 'Video freeze', road: 'Video freeze',    icon: 'lock',   c: 'var(--video)', line: true, title: 'Presentation video freeze', note: '' },
-  { d: '11-10', flag: 'Fly to Paris', road: 'Paris',           icon: 'trip',   c: 'var(--navy)', ring: true, title: 'Flight to Paris', note: '' },
-  { d: '11-16', flag: 'Finals',       road: 'Finals',          icon: 'trophy', c: 'var(--mock)', big: true, title: 'Finalist presentation', note: 'Paris' },
+  { d: '10-28', flag: 'Video freeze', road: 'Video freeze',    icon: 'lock',   c: 'var(--red)', line: true, title: 'Presentation video freeze', note: '' },
+  { d: '11-10', flag: 'Fly to Paris', road: 'Paris',           icon: 'trip',   c: 'var(--trip)', ring: true, title: 'Flight to Paris', note: '' },
+  { d: '11-16', flag: 'Finals',       road: 'Finals',          icon: 'trophy', c: 'var(--gold)', big: true, title: 'Finalist presentation', note: 'Paris' },
 ];
 MILES.forEach(m => m.D = D(m.d));
 
@@ -336,14 +335,16 @@ const hidden = new Set();
   el.innerHTML = h;
 })();
 
-/* ---------- internal freeze callout ---------- */
-(function callout() {
-  const n = days(today, INTERNAL);
-  document.getElementById('callout').innerHTML = `
-    <span class="badge">${svg('lock')} Thu 1 Oct · Internal wiki freeze</span>
-    <span class="msg">Everyone hands in their <b>full, fixed wiki draft</b> with every existing result. After this, only new data gets added.</span>
-    <span class="parts"><span>Results</span><span>Registry</span><span>Modeling</span><span>Measurement</span><span>Hardware</span></span>
-    <span class="left">${n > 0 ? n + ' days left' : n === 0 ? 'Today' : 'Passed'}</span>`;
+/* ---------- delivery callouts ---------- */
+(function callouts() {
+  const left = d => { const n = days(today, d); return n > 0 ? n + ' days left' : n === 0 ? 'Today' : 'Passed'; };
+  document.getElementById('callouts').innerHTML = `
+    <div class="callout"><span class="badge">${svg('lock')} Thu 1 Oct · Internal wiki freeze</span>
+      <span class="msg"><b>Every owner delivers a full, fixed wiki draft</b>: results, registry, modeling, measurement, hardware.</span>
+      <span class="left">${left(INTERNAL)}</span></div>
+    <div class="callout"><span class="badge">${svg('video')} Sat 10 Oct · Video v1</span>
+      <span class="msg"><b>Full first version, start to finish</b>, with every key result on screen.</span>
+      <span class="left">${left(D('10-10'))}</span></div>`;
 })();
 
 /* ---------- legend ---------- */
