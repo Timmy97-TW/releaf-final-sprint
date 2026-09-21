@@ -17,10 +17,10 @@
   --paper:#f5f6f8; --panel:#ffffff; --ink:#172033; --muted:#667085; --line:#e2e5eb; --line-soft:#eef0f4;
   --navy:#1b2a5c; --lime:#8cc63f; --lime-soft:#f0f6e6; --red:#c62828; --gold:#b8860b;
   /* phases */
-  --ph-draft:#7ba05b; --ph-refine:#5e81ac; --ph-video:#a8738e; --ph-rehearse:#b89b5e;
+  --ph-draft:#4f7d2c; --ph-refine:#34598a; --ph-video:#7e3a5e; --ph-rehearse:#8f6d1c;
   /* themes */
-  --opto:#6554c0; --bio:#00857a; --sw:#2f6db5; --plant:#3f8a3a; --bopep:#c4611b;
-  --wiki:#3b4a63; --video:#a63d6b; --mock:#8c7318; --trip:#5b6474;
+  --opto:#4a3aa8; --bio:#006d64; --sw:#1d5a9e; --plant:#2d6a25; --bopep:#b04e0c;
+  --wiki:#2b3549; --video:#8c2657; --mock:#6f5a0e; --trip:#4a5262;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -62,15 +62,22 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 /* legend */
 .legend{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-bottom:8px}
 .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 10px 3px 4px;font-size:12px;font-weight:500;cursor:pointer;user-select:none}
-.chip .ic{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font-size:12px}
+.chip .ic{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#fff;font-size:11px}
 .chip[aria-pressed="false"]{opacity:.4}
 .chip[aria-pressed="false"] .ic{background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
 .chip:hover{border-color:color-mix(in srgb,var(--c) 45%,#fff)}
 .chip.star{border-color:color-mix(in srgb,var(--bopep) 45%,#fff)}
+.tools{margin-left:auto;display:flex;gap:6px}
+.tool{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--navy);background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:4px 10px;cursor:pointer}
+.tool:hover{border-color:var(--navy)}
+.tool svg{font-size:13px}
+.copy{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:11.5px;font-weight:600;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 9px;cursor:pointer}
+.status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;border-radius:5px;padding:2px 7px;margin:8px 4px 0 0;background:#fff;border:1px solid var(--line)}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--st)}
 .linkbtn{background:none;border:0;padding:3px 6px;color:var(--sw);cursor:pointer;font-size:12px;font-weight:500}
 .key{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-left:8px}
 .key i{display:inline-block;width:22px;height:10px;border-radius:3px}
-.key .k-est{border:1.5px dashed var(--muted);background:#fff}
+.key .k-est{background:var(--muted) repeating-linear-gradient(135deg,rgba(255,255,255,.35) 0 3px,transparent 3px 7px)}
 .key .k-ph{background:linear-gradient(90deg,var(--ph-draft) 0 25%,var(--ph-refine) 25% 50%,var(--ph-video) 50% 75%,var(--ph-rehearse) 75%);height:4px;width:28px;border-radius:2px}
 
 /* ---------- calendar ---------- */
@@ -87,6 +94,7 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 .cell.post{background:#f0f1f4;background-image:repeating-linear-gradient(135deg,transparent 0 7px,rgba(21,33,63,.045) 7px 8px)}
 .cell.out{background:var(--paper);cursor:default}
 .cell.today{background:var(--lime-soft)}
+.cell.past{background:#eceef2}
 .cell.line::after{content:"";position:absolute;top:0;bottom:0;right:-2px;width:3px;background:var(--lc);z-index:2;border-radius:2px}
 .cell:hover:not(.out){background-color:#f4f7fd}
 .head{position:relative;z-index:3;display:grid;grid-template-columns:repeat(7,1fr);height:24px;pointer-events:none}
@@ -100,22 +108,18 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 .flag span{overflow:hidden;text-overflow:ellipsis}
 .flag svg{font-size:11px}
 .flag.ring{background:#fff;color:var(--fc);box-shadow:inset 0 0 0 1.3px var(--fc)}
-.flag.mock{background:color-mix(in srgb,var(--mock) 13%,#fff);color:color-mix(in srgb,var(--mock) 80%,#000);padding:0 5px 0 4px}
+.flag.mock{background:color-mix(in srgb,var(--mock) 16%,#fff);color:var(--mock);padding:0 5px 0 4px}
 .bars{position:relative;z-index:3;display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:var(--rh,20px);row-gap:2px;padding:1px 0 6px;pointer-events:none}
 .bar{pointer-events:auto;display:flex;align-items:center;gap:5px;margin:0 4px;border-radius:5px;border:0;
-  background:color-mix(in srgb,var(--c) 14%,#fff);color:color-mix(in srgb,var(--c) 72%,#000);
-  box-shadow:inset 3px 0 0 var(--c);font-size:var(--fs,11.5px);font-weight:600;padding:0 7px 0 9px;white-space:nowrap;overflow:hidden;cursor:pointer;text-align:left;transition:background .12s,color .12s,opacity .12s}
+  background:var(--c);color:#fff;font-size:var(--fs,11.5px);font-weight:600;padding:0 7px 0 7px;white-space:nowrap;overflow:hidden;cursor:pointer;text-align:left;transition:filter .12s,opacity .12s}
 .bar .t{overflow:hidden;text-overflow:ellipsis;min-width:0}
-.bar svg{font-size:calc(var(--fs,11.5px) + 1px);color:var(--c)}
-.bar.est{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 11%,#fff) 0 6px,#fff 6px 11px);box-shadow:inset 0 0 0 1.3px color-mix(in srgb,var(--c) 55%,#fff)}
-.bar.est:not(.cl){box-shadow:inset 3px 0 0 var(--c),inset 0 0 0 1.3px color-mix(in srgb,var(--c) 55%,#fff)}
-.bar.cl{margin-left:0;border-top-left-radius:0;border-bottom-left-radius:0;box-shadow:none;padding-left:7px}
-.bar.est.cl{box-shadow:inset 0 0 0 1.3px color-mix(in srgb,var(--c) 55%,#fff)}
+.bar svg{font-size:calc(var(--fs,11.5px) + 1px);color:rgba(255,255,255,.85)}
+.bar.est{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.2) 0 5px,transparent 5px 11px)}
+.bar.cl{margin-left:0;border-top-left-radius:0;border-bottom-left-radius:0}
 .bar.cr{margin-right:0;border-top-right-radius:0;border-bottom-right-radius:0}
-.bar .must{margin-left:auto;flex:none;font-size:8.5px;font-weight:800;letter-spacing:.06em;color:#fff;background:var(--red);border-radius:3px;padding:0 4px;line-height:13px}
-.bar .end{margin-left:auto;flex:none;font-size:9.5px;opacity:.75;font-weight:700}
-.bar:hover,.bar.hl{background:var(--c);color:#fff}
-.bar:hover svg,.bar.hl svg{color:#fff}
+.bar .must{margin-left:auto;flex:none;font-size:8.5px;font-weight:800;letter-spacing:.06em;color:var(--red);background:#fff;border-radius:3px;padding:0 4px;line-height:13px}
+.bar .end{margin-left:auto;flex:none;font-size:9.5px;opacity:.85;font-weight:700}
+.bar:hover,.bar.hl{filter:brightness(1.25) saturate(1.1)}
 .bar:focus-visible,.flag:focus-visible,.chip:focus-visible,.node:focus-visible{outline:2px solid var(--sw);outline-offset:1px}
 .cal.dim .bar:not(.hl){opacity:.3}
 
@@ -145,10 +149,15 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
 .d-tag.must{background:var(--red);color:#fff}
 .d-row{display:flex;gap:9px;align-items:flex-start;padding:7px 8px;border-radius:8px;cursor:pointer;border:0;background:none;width:100%;text-align:left}
 .d-row:hover{background:var(--paper)}
-.d-row .ic{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 15%,#fff);color:var(--c);font-size:12px}
+.d-row .ic{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--c);color:#fff;font-size:11px}
 .d-row small{display:block;color:var(--muted)}
 .d-sec{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:12px 0 4px}
 
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#fff}.tools,.linkbtn,.drawer,.after .art{display:none}
+  .app{max-width:none;padding:0}.week{break-inside:avoid}
+}
 @media (max-width:1100px){
   .top{grid-template-columns:auto 1fr}
   .road{grid-column:1/-1;margin:4px 30px 0}
@@ -170,6 +179,7 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
   .bar{margin:0 2px;padding:0 3px 0 5px}
   .bar svg,.bar .end{display:none}
   .key{display:none}
+  .tools{margin-left:0;flex-wrap:wrap}
   .after{grid-template-columns:1fr}
   .art{max-width:260px;margin:0 auto}
 }
@@ -181,7 +191,7 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
     <img class="logo" src="img/logo.png" alt="Releaf, GEMs Taiwan 2026 team logo">
     <div class="brand">
       <h1>Road to <span>Paris</span></h1>
-      <div class="sub">Releaf · GEMs Taiwan · iGEM 2026 · 21 Sep – 16 Nov</div>
+      <div class="sub">Releaf · GEMs Taiwan · iGEM 2026 · 21 Sep – 16 Nov · <span id="upd"></span></div>
     </div>
     <div class="road" id="road"></div>
   </header>
@@ -197,7 +207,6 @@ svg.i{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:
     </div>
     <figure class="art" style="margin-left:0;margin-right:0">
       <img src="img/mascot-hydro.png" alt="Hand-drawn Releaf mascot: a smiling seed with a sprout, sitting in a bubble of flowing protectant">
-      <p><b>Mascot sketch by Abigail</b><br>The hydroponic Releaf seed, wrapped in flowing protectant</p>
     </figure>
   </div>
 </div>
@@ -219,6 +228,8 @@ const IC = {
   trophy:'<path d="M8 21h8M12 16.5V21M7 3.5h10V9a5 5 0 0 1-10 0z"/><path d="M17 5h3v1.5A3.5 3.5 0 0 1 16.8 10M7 5H4v1.5A3.5 3.5 0 0 0 7.2 10"/>',
   blot:  '<rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7.5 9h3M13.5 9h3M7.5 13h3M13.5 13h3M7.5 17h3"/>',
   flag:  '<path d="M5 21V4M5 4h12l-2.5 4.5L17 13H5"/>',
+  cal:   '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M12 13.5v4M10 15.5h4"/>',
+  link:  '<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',
 };
 const svg = k => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
 
@@ -233,6 +244,7 @@ const WD = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const fmt = d => `${WD[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;
 const short = d => `${MON[d.getMonth()]} ${d.getDate()}`;
 
+const UPDATED = D('09-21');
 const START = D('09-21'), INTERNAL = D('10-01'), FREEZE = D('10-21'), VFREEZE = D('10-28'), END = D('11-16');
 const today = (() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); })();
 
@@ -264,13 +276,17 @@ const TASKS = [
   { id: 'b1', lane: 'bio', title: 'ACCD constitutive run 2 · students solo', s: '09-23', e: '09-27', end: 'WB',
     who: 'Joshua, Anton, Noah',
     notes: ['Students set up and run it on their own from Wed 23 Sep', 'Western blot results Sun 27 Sep', 'The digital twin trials run on this data'] },
-  { id: 'b2', lane: 'bio', title: 'Automated run: pinch + luer valves', s: '10-01', e: '10-03',
-    notes: ['Pinch valve and luer valve automation from Mr Ho, Joshua’s teacher', 'Run Thu 1 – Sat 3 Oct'] },
+  { id: 'b3', lane: 'bio', title: 'Green light into the control loop', s: '09-24', e: '09-30', est: true, end: '9/30',
+    notes: ['Switch the green light on from the automation loop', 'Open problems: power supply, and central control of the green light', 'Must work before the 1 Oct run'] },
+  { id: 'b4', lane: 'bio', title: 'pH sensor integration', s: '09-28', e: '09-30', est: true, end: '9/30',
+    notes: ['pH sensor wired into the bioreactor loop before the 1 Oct milestone'] },
+  { id: 'b2', lane: 'bio', title: 'Final automated run: valves + green light + pH', s: '10-01', e: '10-03', dep: ['b3', 'b4'],
+    notes: ['Pinch valve and luer valve automation from Mr Ho, Joshua’s teacher', 'With green light and pH in the loop, this run is the final bioreactor version', 'Run Thu 1 – Sat 3 Oct'] },
   { id: 's1', lane: 'sw', title: 'AIoT sensors: install, run, collect', s: '09-21', e: '09-27',
     notes: ['Install and run the sensors', 'Every data collection finished by Sun 27 Sep'] },
   { id: 's2', lane: 'sw', title: 'AIoT sensor write-up', s: '09-28', e: '10-01',
     notes: ['Sensor write-up finished by Thu 1 Oct, in time for the internal wiki freeze'] },
-  { id: 's3', lane: 'sw', title: 'Digital twin trials on run-2 data', s: '09-27', e: '09-30', dep: 'b1',
+  { id: 's3', lane: 'sw', title: 'Digital twin trials on run-2 data', s: '09-27', e: '09-30', dep: ['b1'],
     notes: ['UI is about 80% built; it now needs real experiments', 'Trials use trained data from bioreactor run 2', 'Run Sun 27 – Wed 30 Sep'] },
   { id: 's4', lane: 'sw', title: 'Digital twin write-up', s: '10-01', e: '10-01',
     notes: ['Writing finished by Thu 1 Oct, in time for the internal wiki freeze'] },
@@ -280,7 +296,7 @@ const TASKS = [
             'BoPep4 plant work is tracked on its own line'] },
   { id: 'bp1', lane: 'bopep', title: 'Level-1 cloning: close out', s: '09-21', e: '09-30', est: true,
     notes: ['Level 1 is close to working', 'End date is assumed; set the real one'] },
-  { id: 'bp3', lane: 'bopep', title: 'BoPep4 on plants', s: '10-01', e: '10-21', est: true, must: true,
+  { id: 'bp3', lane: 'bopep', title: 'BoPep4 on plants', s: '10-01', e: '10-21', est: true, must: true, dep: ['bp1'],
     notes: ['A new protectant from academic work, moved toward farmer use', 'Start assumed at 1 Oct, once cloning closes', 'Plant data due Wed 21 Oct'] },
   { id: 'w1', lane: 'wiki', title: 'Full wiki draft · every owner delivers', s: '09-21', e: '10-01', end: '10/1',
     notes: ['Internal freeze Thu 1 Oct: every section owner hands in a full, fixed draft',
@@ -288,7 +304,7 @@ const TASKS = [
             'Every existing result written, fixed and pushed'] },
   { id: 'w2', lane: 'wiki', title: 'Add new results, fix, polish', s: '10-02', e: '10-21',
     notes: ['Only new experiment results get added after 1 Oct', 'Freeze Wed 21 Oct'] },
-  { id: 'v1', lane: 'video', title: 'Video v1: full first version, all key results', s: '10-02', e: '10-10', must: true,
+  { id: 'v1', lane: 'video', title: 'Video v1: full first version, all key results', s: '10-02', e: '10-10', must: true, dep: ['w1'],
     notes: ['Delivered Sat 10 Oct as a complete first version, not a rough cut',
             'Covers the whole story start to finish, with every key result on screen',
             'Built from the data in the 1 Oct wiki draft', 'Start date 2 Oct is assumed'] },
@@ -360,8 +376,9 @@ LANES.forEach(l => {
   legend.appendChild(b);
 });
 legend.insertAdjacentHTML('beforeend', `<button class="linkbtn" id="all">Show all</button>
-  <span class="key"><i class="k-est"></i>dashed = date assumed</span>
-  <span class="key"><i class="k-ph"></i>top stripe = phase</span>`);
+  <span class="key"><i class="k-est"></i>striped = date assumed</span>
+  <span class="key"><i class="k-ph"></i>top stripe = phase</span>
+  <span class="tools"><button class="tool" id="wk">${svg('flag')}This week</button><button class="tool" id="ics">${svg('cal')}Add deadlines to my calendar</button></span>`);
 document.getElementById('all').onclick = () => { hidden.clear(); render(); };
 
 /* ---------- calendar ---------- */
@@ -402,7 +419,7 @@ function renderWeek(w, isSprint) {
     else {
       if (d.getDay() === 0 || d.getDay() === 6) cls.push('we');
       if (isSprint && d > FREEZE) cls.push('post');
-      if (same(d, today)) cls.push('today');
+      if (same(d, today)) cls.push('today'); else if (d < today) cls.push('past');
       if (ml) { cls.push('line'); style = `--lc:${ml.c}`; }
     }
     cells += `<div class="${cls.join(' ')}" style="${style}" data-day="${out ? '' : +d}"></div>`;
@@ -459,23 +476,37 @@ addEventListener('resize', layout);
 
 /* ---------- drawer ---------- */
 const drawer = document.getElementById('drawer'), dbody = document.getElementById('dbody');
-const close = () => drawer.classList.remove('open');
+const close = () => { if (drawer.classList.contains('open')) setHash(''); drawer.classList.remove('open'); };
 document.getElementById('dx').onclick = close;
 addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 const spanTxt = t => t.s === t.e ? fmt(t.S) : `${fmt(t.S)} → ${fmt(t.E)} · ${days(t.S, t.E) + 1} days`;
 const row = t => `<button class="d-row" data-task="${t.id}" style="--c:var(--${t.lane})"><span class="ic">${svg(t.lane)}</span><span>${t.title}<small>${laneOf(t.lane).name} · ${spanTxt(t)}</small></span></button>`;
 
+function status(t) {
+  if (t.E < today) return ['Done by schedule', '#667085'];
+  if (t.S <= today) return [`In progress · ${days(today, t.E)} days left`, '#2d6a25'];
+  const n = days(today, t.S); return [`Starts in ${n} day${n > 1 ? 's' : ''}`, '#34598a'];
+}
+const copyBtn = () => `<button class="copy" id="copy">${svg('link')}<span>Copy link to this</span></button>`;
+const setHash = h => history.replaceState(null, '', h ? '#' + h : location.pathname + location.search);
+
 function showTask(id) {
-  const t = TASKS.find(x => x.id === id), l = laneOf(t.lane);
-  const dep = t.dep ? TASKS.find(x => x.id === t.dep) : null;
+  const t = TASKS.find(x => x.id === id); if (!t) return;
+  const l = laneOf(t.lane);
+  const deps = (t.dep || []).map(i => TASKS.find(x => x.id === i));
+  const unblocks = TASKS.filter(x => (x.dep || []).includes(t.id));
+  const [st, sc] = status(t);
   drawer.style.setProperty('--c', `var(--${t.lane})`);
   dbody.innerHTML = `
     <div class="d-top"><div class="d-lane">${svg(t.lane)}${l.name}</div><h2>${t.title}</h2><div class="d-when">${spanTxt(t)}</div>
-    ${t.must ? '<span class="d-tag must">MUST deliver</span>' : ''}${t.est ? '<span class="d-tag est">Dates partly assumed</span>' : ''}</div>
+    <span class="status" style="--st:${sc}"><i></i>${st}</span>${t.must ? '<span class="d-tag must">MUST deliver</span>' : ''}${t.est ? '<span class="d-tag est">Dates partly assumed</span>' : ''}
+    <div>${copyBtn()}</div></div>
     <div class="d-in">
     ${t.who ? `<div class="d-sec">Who</div><div>${t.who}</div>` : ''}
     <div class="d-sec">Notes</div><ul>${t.notes.map(n => `<li>${n}</li>`).join('')}</ul>
-    ${dep ? `<div class="d-sec">Depends on</div>${row(dep)}` : ''}</div>`;
+    ${deps.length ? `<div class="d-sec">Needs first</div>${deps.map(row).join('')}` : ''}
+    ${unblocks.length ? `<div class="d-sec">Unblocks</div>${unblocks.map(row).join('')}` : ''}</div>`;
+  setHash('t=' + t.id);
   drawer.classList.add('open');
 }
 
@@ -484,9 +515,10 @@ function showDay(d) {
   const ts = TASKS.filter(t => !hidden.has(t.lane) && t.S <= d && t.E >= d);
   const ph = phaseOf(d), left = days(d, FREEZE), toInt = days(d, INTERNAL);
   drawer.style.setProperty('--c', ph ? ph.c : 'var(--navy)');
+  setHash('d=' + (d.getMonth() + 1) + '-' + d.getDate());
   const count = toInt > 0 ? `${toInt} days to the internal freeze · ${left} to wiki freeze` : left > 0 ? `${left} days to wiki freeze` : left === 0 ? 'Wiki freeze day' : 'After the wiki freeze';
   dbody.innerHTML = `
-    <div class="d-top"><div class="d-lane">Phase · ${ph ? ph.name : ''}</div><h2>${fmt(d)}</h2><div class="d-when">${count}</div></div>
+    <div class="d-top"><div class="d-lane">Phase · ${ph ? ph.name : ''}</div><h2>${fmt(d)}</h2><div class="d-when">${count}</div><div>${copyBtn()}</div></div>
     <div class="d-in">
     ${ms.length ? '<div class="d-sec">Deadline</div>' + ms.map(m => `<div class="d-row" style="--c:${m.c};cursor:default"><span class="ic">${svg(m.icon)}</span><span><b>${m.title}</b>${m.note ? `<small>${m.note}</small>` : ''}</span></div>`).join('') : ''}
     <div class="d-sec">Running this day</div>
@@ -494,7 +526,43 @@ function showDay(d) {
   drawer.classList.add('open');
 }
 
+function showWeek() {
+  const from = today < START ? START : today, to = add(from, 7);
+  const next = MILES.find(m => m.D >= from);
+  const due = TASKS.filter(t => !t.badge && t.E >= from && t.E <= to);
+  const now = TASKS.filter(t => !t.badge && t.S <= from && t.E > to);
+  const start = TASKS.filter(t => !t.badge && t.S > from && t.S <= to && t.E > to);
+  const mocks = TASKS.filter(t => t.badge && t.S >= from && t.S <= to);
+  drawer.style.setProperty('--c', 'var(--navy)');
+  dbody.innerHTML = `
+    <div class="d-top"><div class="d-lane">${svg('flag')}This week</div><h2>${short(from)} – ${short(to)}</h2>
+    <div class="d-when">${next ? `Next deadline: <b>${next.title}</b>, ${fmt(next.D)} (${days(from, next.D) === 0 ? 'today' : 'in ' + days(from, next.D) + ' days'})` : ''}</div></div>
+    <div class="d-in">
+    ${due.length ? `<div class="d-sec">Due in the next 7 days</div>${due.map(row).join('')}` : ''}
+    ${now.length ? `<div class="d-sec">Running now</div>${now.map(row).join('')}` : ''}
+    ${start.length ? `<div class="d-sec">Starting this week</div>${start.map(row).join('')}` : ''}
+    ${mocks.length ? `<div class="d-sec">Judging mocks</div>${mocks.map(row).join('')}` : ''}</div>`;
+  setHash('week');
+  drawer.classList.add('open');
+}
+
+function downloadIcs() {
+  const d8 = d => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
+  const ev = MILES.map(m => ['BEGIN:VEVENT', `UID:releaf-${m.d}@releaf-final-sprint`, `DTSTAMP:${d8(new Date())}T000000Z`,
+    `DTSTART;VALUE=DATE:${d8(m.D)}`, `DTEND;VALUE=DATE:${d8(add(m.D, 1))}`, `SUMMARY:Releaf · ${m.title}`,
+    `DESCRIPTION:${(m.note || '').replace(/,/g, '\\,')}`, 'END:VEVENT'].join('\r\n'));
+  const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Releaf//Final sprint//EN', 'CALSCALE:GREGORIAN', ...ev, 'END:VCALENDAR'].join('\r\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+  a.download = 'releaf-deadlines.ics'; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+document.getElementById('wk').onclick = e => { e.stopPropagation(); showWeek(); };
+document.getElementById('ics').onclick = downloadIcs;
+
 document.addEventListener('click', e => {
+  const cp = e.target.closest('#copy');
+  if (cp) { navigator.clipboard && navigator.clipboard.writeText(location.href).then(() => { cp.querySelector('span').textContent = 'Link copied'; }); return; }
   const tk = e.target.closest('[data-task]'); if (tk) { showTask(tk.dataset.task); return; }
   const mi = e.target.closest('[data-mile]'); if (mi) { showDay(D(mi.dataset.mile)); return; }
   const c = e.target.closest('.cell[data-day]'); if (c && c.dataset.day) { showDay(new Date(+c.dataset.day)); return; }
@@ -514,6 +582,13 @@ cal.forEach(c => {
 });
 
 render();
+document.getElementById('upd').textContent = 'plan updated ' + short(UPDATED);
+(function openFromHash() {
+  const h = location.hash.slice(1);
+  if (h === 'week') showWeek();
+  else if (h.startsWith('t=')) showTask(h.slice(2));
+  else if (/^d=\d+-\d+$/.test(h)) showDay(D(h.slice(2)));
+})();
 document.fonts && document.fonts.ready.then(layout);
 addEventListener('load', layout);
 </script>
